@@ -33,7 +33,7 @@ RUN apt-get update && \
 
 COPY talos.pub /tmp/talos.pub
 
-# Download and build CalmAV
+# Download and build ClamAV
 
 RUN wget -nv https://www.clamav.net/downloads/production/clamav-${CLAMAV_VERSION}.tar.gz && \
     wget -nv https://www.clamav.net/downloads/production/clamav-${CLAMAV_VERSION}.tar.gz.sig &&  \
