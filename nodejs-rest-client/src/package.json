@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-rest-client-src",
+  "version": "0.0.1",
+  "description": "Rest client for virus scanner",
+  "main": "bootstrap.js",
+  "author": "Pavel Varentsov",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/common": "6.8.5",
+    "@nestjs/core": "6.8.5",
+    "@nestjs/cqrs": "6.0.1",
+    "@nestjs/platform-express": "6.8.5",
+    "@nestjs/swagger": "3.1.0",
+    "jsonwebtoken": "8.5.1",
+    "reflect-metadata": "0.1.13",
+    "rxjs": "6.5.3"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "8.3.5"
+  }
+}
