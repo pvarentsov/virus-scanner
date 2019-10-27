@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  scanner:
+    restart: always
+    build:
+      context: scanner/clamav/docker
+      dockerfile: Dockerfile
+    expose:
+      - 3310
+    networks:
+      network:
+        aliases:
+          - scanner
+
+networks:
+
+  network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "true"
+      com.docker.network.bridge.enable_icc: "true"
