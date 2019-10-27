@@ -19,6 +19,9 @@ run_tsc() {
 
 copy_configuration_files() {
     cp ./src/package.json ./dist/package.json
+
+    mkdir -p ./dist/server/static/
+    cp ./src/server/static/* ./dist/server/static/
 }
 
 install_dependencies() {

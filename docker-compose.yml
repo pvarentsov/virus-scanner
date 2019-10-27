@@ -7,6 +7,8 @@ services:
     build:
       context: scanner/clamav/docker
       dockerfile: Dockerfile
+    ports:
+      - 3310:3310
     expose:
       - 3310
     networks:
