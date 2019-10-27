@@ -2,6 +2,8 @@ FROM ubuntu:latest
 
 ENV CLAMAV_VERSION=0.102.0
 
+# Install dependencies
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install --no-install-recommends -y \
@@ -31,6 +33,8 @@ RUN apt-get update && \
 
 COPY talos.pub /tmp/talos.pub
 
+# Download and build CalmAV
+
 RUN wget -nv https://www.clamav.net/downloads/production/clamav-${CLAMAV_VERSION}.tar.gz && \
     wget -nv https://www.clamav.net/downloads/production/clamav-${CLAMAV_VERSION}.tar.gz.sig &&  \
     gpg --import /tmp/talos.pub && \
@@ -43,6 +47,7 @@ RUN wget -nv https://www.clamav.net/downloads/production/clamav-${CLAMAV_VERSION
     rm -rf /tmp/talos.pub
 
 # Add ClamAV user
+
 RUN groupadd -r clamav && \
     useradd -r -g clamav -u 1000 clamav -d /var/lib/clamav && \
     mkdir -p /var/lib/clamav && \
@@ -50,13 +55,21 @@ RUN groupadd -r clamav && \
     chown -R clamav:clamav /var/lib/clamav /usr/local/share/clamav
 
 # Configure ClamAV
-RUN chown clamav:clamav -R /usr/local/etc/
 
-# Initial update of ClamAV databases
-RUN ldd /usr/local/bin/freshclam && freshclam && \
+RUN chown clamav:clamav -R /usr/local/etc/
+COPY --chown=clamav:clamav ./*.conf /usr/local/etc/
+
+RUN cp /usr/local/lib/libclamav.so.* /usr/lib/x86_64-linux-gnu && \
+    cp /usr/local/lib/libfreshclam.so.* /usr/lib/x86_64-linux-gnu && \
+    cp /usr/local/lib/libclammspack.so.* /usr/lib/x86_64-linux-gnu && \
+    cp /usr/local/lib/libclamunrar_iface.so.* /usr/lib/x86_64-linux-gnu && \
+    cp /usr/local/lib/libclamunrar.so.* /usr/lib/x86_64-linux-gnu
+
+RUN freshclam && \
     chown clamav:clamav /var/lib/clamav/*.cvd
 
-# Set permissions
+# Add permissions
+
 RUN mkdir /var/run/clamav && \
     chown clamav:clamav /var/run/clamav && \
     chmod 750 /var/run/clamav
