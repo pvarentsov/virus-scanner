@@ -35,18 +35,21 @@ export class ClamavTCPClient {
 
             let readFinished: boolean = false;
 
-            const socket: Socket = net.createConnection({host: ClamavTCPClient.HOST, port: ClamavTCPClient.PORT},
+            const socket: Socket = net.createConnection(
+                { host: ClamavTCPClient.HOST, port: ClamavTCPClient.PORT },
                 (): void => {
                     socket.write(ClamavTCPClient.SCAN_STREAM_COMMAND);
 
                     readStream.pipe(ClamavTCPClient.chunkTransform()).pipe(socket);
+
                     readStream
                         .on('end', () => {
                             readFinished = true;
                             readStream.destroy();
                         })
                         .on('error', reject);
-            });
+                }
+            );
 
             const replies: Uint8Array[] = [];
 
