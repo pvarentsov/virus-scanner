@@ -7,11 +7,11 @@ export class ClamAVTCPClientHelper {
     public static transformReadStreamToClamAVInstream = (): Transform => {
         const transform: Transform = new Transform();
 
-        transform._transform = (chunk: Uint8Array, encoding: string, callback: TransformCallback): void => {
+        transform._transform = (chunk: Buffer, encoding: string, callback: TransformCallback): void => {
             const chunkLengthPart: Buffer = Buffer.alloc(4);
             chunkLengthPart.writeUInt32BE(chunk.length, 0);
 
-            const chunkPart: Uint8Array = chunk;
+            const chunkPart: Buffer = chunk;
 
             transform.push(chunkLengthPart);
             transform.push(chunkPart);

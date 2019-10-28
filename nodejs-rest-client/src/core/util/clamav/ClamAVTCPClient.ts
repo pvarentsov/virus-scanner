@@ -23,14 +23,14 @@ export class ClamAVTCPClient {
         let isReadStreamFinished: boolean = false;
 
         return new Promise((resolve: ResolveCallback, reject: RejectCallback): void => {
-            const scanResponseChunks: Uint8Array[] = [];
+            const scanResponseChunks: Buffer[] = [];
 
             const connectAttemptTimer: NodeJS.Timeout = setTimeout(
                 () => socket.destroy(new Error('Timeout connecting to server')),
                 ClamAVTCPClient.TIMEOUT
             );
 
-            const socketOnDataListener: (chunk: Uint8Array) => void = (chunk: Uint8Array): void => {
+            const socketOnDataListener: (chunk: Buffer) => void = (chunk: Buffer): void => {
                 clearTimeout(connectAttemptTimer);
 
                 if (!readStream.isPaused()) {
