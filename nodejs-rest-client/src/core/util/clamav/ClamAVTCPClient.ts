@@ -1,9 +1,8 @@
 import * as net from 'net';
 import { Socket } from 'net';
-import { Transform, TransformCallback } from 'stream';
 import { ClamAVScanDetails } from './types/ClamAVScanDetails';
-import { ClamAVScanStatus } from './types/ClamAVScanStatus';
 import * as stream from 'fs';
+import { ClamAVTCPClientHelper } from './helper/ClamAVTCPClientHelper';
 
 export class ClamAVTCPClient {
 
@@ -16,11 +15,15 @@ export class ClamAVTCPClient {
     private static SCAN_STREAM_COMMAND: string = 'zINSTREAM\0';
 
     public static async scanStream(readStream: stream.ReadStream): Promise<ClamAVScanDetails> {
+        const scanMessage: string = await ClamAVTCPClient.sendTCPCommandToScanStream(readStream);
+        return ClamAVTCPClientHelper.parseScanDetails(scanMessage);
+    }
 
-        const scanMessage: string = await new Promise((resolve: ResolveCallback, reject: RejectCallback): void => {
+    private static sendTCPCommandToScanStream = (readStream: stream.ReadStream): Promise<string> => {
+        let isReadFinished: boolean = false;
+
+        return new Promise((resolve: ResolveCallback, reject: RejectCallback): void => {
             const scanResponseChunks: Uint8Array[] = [];
-
-            let readFinished: boolean = false;
 
             const connectAttemptTimer: NodeJS.Timeout = setTimeout(
                 () => socket.destroy(new Error('Timeout connecting to server')),
@@ -36,29 +39,27 @@ export class ClamAVTCPClient {
 
                 scanResponseChunks.push(chunk);
             };
-
             const socketOnEndListener: () => void = (): void => {
                 clearTimeout(connectAttemptTimer);
 
                 const scanResultBuffer: Buffer = Buffer.concat(scanResponseChunks);
 
-                if (!readFinished) {
+                if (!isReadFinished) {
                     reject(new Error('Scan aborted. Reply from server: ' + scanResultBuffer));
                 }
 
                 resolve(scanResultBuffer.toString('utf-8'));
             };
-
             const socketOnConnectListener: () => void = (): void => {
                 socket.write(ClamAVTCPClient.SCAN_STREAM_COMMAND);
 
                 readStream.addListener('end', () => {
-                    readFinished = true;
+                    isReadFinished = true;
                     readStream.destroy();
                 });
                 readStream.addListener('error', reject);
 
-                readStream.pipe(ClamAVTCPClient.transformStreamToClamAVInstream()).pipe(socket);
+                readStream.pipe(ClamAVTCPClientHelper.transformReadStreamToClamAVInstream()).pipe(socket);
             };
 
             const socket: Socket = net
@@ -70,49 +71,6 @@ export class ClamAVTCPClient {
             socket.addListener('end', socketOnEndListener);
             socket.addListener('error', reject);
         });
-
-        return ClamAVTCPClient.parseScanDetails(scanMessage);
-    }
-
-    private static transformStreamToClamAVInstream: () => Transform = (): Transform => {
-        const transform: Transform = new Transform();
-
-        transform._transform = (chunk: Uint8Array, encoding: string, callback: TransformCallback): void => {
-            const chunkLengthPart: Buffer = Buffer.alloc(4);
-            chunkLengthPart.writeUInt32BE(chunk.length, 0);
-
-            const chunkPart: Uint8Array = chunk;
-
-            transform.push(chunkLengthPart);
-            transform.push(chunkPart);
-
-            callback();
-        };
-
-        transform._flush = (callback: TransformCallback): void => {
-            const zeroLengthPart: Buffer = Buffer.alloc(4);
-            zeroLengthPart.writeUInt32BE(0, 0);
-
-            transform.push(zeroLengthPart);
-
-            callback();
-        };
-
-        return transform;
-    }
-
-    private static parseScanDetails(message: string): ClamAVScanDetails {
-        const parsedMessage: string = message
-            .replace('\u0000', '')
-            .replace('stream: ', '')
-            .replace('FOUND', 'found')
-            .replace('OK', 'Ok');
-
-        const status: ClamAVScanStatus = message.includes('OK') && !message.includes('FOUND')
-            ? ClamAVScanStatus.CLEAN
-            : ClamAVScanStatus.INFECTED;
-
-        return { message: parsedMessage, status: status };
     }
 
 }
