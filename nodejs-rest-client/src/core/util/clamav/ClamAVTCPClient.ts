@@ -20,7 +20,7 @@ export class ClamAVTCPClient {
     }
 
     private static sendTCPCommandToScanStream = (readStream: stream.ReadStream): Promise<string> => {
-        let isReadFinished: boolean = false;
+        let isReadStreamFinished: boolean = false;
 
         return new Promise((resolve: ResolveCallback, reject: RejectCallback): void => {
             const scanResponseChunks: Uint8Array[] = [];
@@ -44,7 +44,7 @@ export class ClamAVTCPClient {
 
                 const scanResultBuffer: Buffer = Buffer.concat(scanResponseChunks);
 
-                if (!isReadFinished) {
+                if (!isReadStreamFinished) {
                     reject(new Error('Scan aborted. Reply from server: ' + scanResultBuffer));
                 }
 
@@ -54,7 +54,7 @@ export class ClamAVTCPClient {
                 socket.write(ClamAVTCPClient.SCAN_STREAM_COMMAND);
 
                 readStream.addListener('end', () => {
-                    isReadFinished = true;
+                    isReadStreamFinished = true;
                     readStream.destroy();
                 });
                 readStream.addListener('error', reject);
