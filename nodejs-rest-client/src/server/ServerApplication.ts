@@ -3,9 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { RootModule } from '../module/RootModule';
 import * as path from 'path';
 import * as fs from 'fs';
-import { ReadStream } from 'fs';
-import { ClamAVClient } from '../core/lib/clamav/client/ClamAVClient';
-import { ClamAVScanDetails } from '../core/lib/clamav/client/types/ClamAVScanDetails';
+import { ClamAVClient, ClamAVConnectionOptions, ClamAVScanDetails } from '../core/lib/clamav';
 
 export class ServerApplication {
 
@@ -25,18 +23,23 @@ export class ServerApplication {
     }
 
     private async scanTestFile(): Promise<void> {
-        const infectedFilePath: string = path.normalize(__dirname + '/static/infected-file.txt');
-        const infectedFileReadStream: ReadStream = fs.createReadStream(infectedFilePath);
+        const clamAVConnectionOptions: ClamAVConnectionOptions = {
+            host: 'localhost',
+            port: 3310,
+        };
 
-        const infectedScanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(infectedFileReadStream);
+        const infectedFilePath: string = path.normalize(__dirname + '/static/infected-file.txt');
+        const infectedFileReadStream: fs.ReadStream = fs.createReadStream(infectedFilePath);
+
+        const infectedScanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(infectedFileReadStream, clamAVConnectionOptions);
 
         const cleanFilePath: string = path.normalize(__dirname + '/static/clean-file.txt');
-        const cleanFileReadStream: ReadStream = fs.createReadStream(cleanFilePath);
+        const cleanFileReadStream: fs.ReadStream = fs.createReadStream(cleanFilePath);
 
-        const cleanScanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(cleanFileReadStream);
+        const cleanScanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(cleanFileReadStream, clamAVConnectionOptions);
 
-        console.log(await ClamAVClient.ping());
-        console.log(await ClamAVClient.getVersion());
+        console.log(await ClamAVClient.ping(clamAVConnectionOptions));
+        console.log(await ClamAVClient.getVersion(clamAVConnectionOptions));
 
         console.log(infectedScanDetails);
         console.log(cleanScanDetails);

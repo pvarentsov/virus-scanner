@@ -8,12 +8,14 @@ import { ClamAVScanDetails } from './types/ClamAVScanDetails';
 import { ClamAVPingDetails } from './types/ClamAVPingDetails';
 import { ClamAVVersionDetails } from './types/ClamAVVersionDetails';
 import { ClamAVClientResponseParser } from './parser/ClamAVClientResponseParser';
+import { ClamAVClientError } from './error/ClamAVClientError';
+import { ClamAVConnectionOptions } from './types/ClamAVConnectionOptions';
 
 export class ClamAVClient {
 
-    private readonly port: number;
-
     private readonly host: string;
+
+    private readonly port: number;
 
     private readonly timeoutInMs: number;
 
@@ -23,11 +25,11 @@ export class ClamAVClient {
 
     private readonly commandResponseChunks: Buffer[];
 
-    private constructor(port: number = 3310, host: string = 'localhost', timeoutInMs: number = 5000, command: IClamAVCommand) {
-        this.port = port;
+    private constructor(host: string, port: number, timeoutInMs: number | undefined, command: IClamAVCommand) {
         this.host = host;
-        this.timeoutInMs = timeoutInMs;
-        this.parsedCommand = this.parseCommand(command);
+        this.port = port;
+        this.timeoutInMs = timeoutInMs || ClamAVClient.DEFAULT_TIMEOUT_IN_MS;
+        this.parsedCommand = ClamAVClient.parseCommand(command);
 
         if (command.data) {
             this.inputData = { isFinished: false, stream: command.data };
@@ -36,27 +38,27 @@ export class ClamAVClient {
         this.commandResponseChunks = [];
     }
 
-    public static async scanStream(stream: Readable): Promise<ClamAVScanDetails> {
+    public static async scanStream(stream: Readable, options: ClamAVConnectionOptions): Promise<ClamAVScanDetails> {
         const command: IClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.INSTREAM, stream);
-        const client: ClamAVClient = new ClamAVClient(undefined, undefined, undefined, command);
+        const client: ClamAVClient = new ClamAVClient(options.host, options.port, options.timeoutInMs, command);
 
         const responseMessage: string = await client.sendCommand();
 
         return ClamAVClientResponseParser.parseScanDetails(responseMessage);
     }
 
-    public static async ping(): Promise<ClamAVPingDetails> {
+    public static async ping(options: ClamAVConnectionOptions): Promise<ClamAVPingDetails> {
         const command: IClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.PING);
-        const client: ClamAVClient = new ClamAVClient(undefined, undefined, undefined, command);
+        const client: ClamAVClient = new ClamAVClient(options.host, options.port, options.timeoutInMs, command);
 
         const responseMessage: string = await client.sendCommand();
 
         return ClamAVClientResponseParser.parsePingDetails(responseMessage);
     }
 
-    public static async getVersion(): Promise<ClamAVVersionDetails> {
+    public static async getVersion(options: ClamAVConnectionOptions): Promise<ClamAVVersionDetails> {
         const command: IClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.VERSION);
-        const client: ClamAVClient = new ClamAVClient(undefined, undefined, undefined, command);
+        const client: ClamAVClient = new ClamAVClient(options.host, options.port, options.timeoutInMs, command);
 
         const responseMessage: string = await client.sendCommand();
 
@@ -67,7 +69,7 @@ export class ClamAVClient {
         return new Promise((resolve: (value: string) => void, reject: (error: Error) => void): void => {
 
             const connectTimer: NodeJS.Timeout = setTimeout(
-                () => socket.destroy(new Error('Timeout connecting to server')),
+                () => socket.destroy(ClamAVClientError.createConnectionTimedOutError()),
                 this.timeoutInMs
             );
 
@@ -107,7 +109,7 @@ export class ClamAVClient {
 
                 if (inputData && !inputData.isFinished) {
                     inputData.stream.destroy();
-                    reject(new Error('Scan aborted. Reply from server: ' + commandResultBuffer));
+                    reject(ClamAVClientError.createScanAbortedError(commandResultBuffer.toString('utf-8')));
                 }
 
                 resolve(commandResultBuffer.toString('utf-8'));
@@ -124,7 +126,7 @@ export class ClamAVClient {
         });
     }
 
-    private parseCommand(command: IClamAVCommand): string {
+    private static parseCommand(command: IClamAVCommand): string {
         let parsedCommand: string = command.name;
 
         if (command.prefix) {
@@ -136,5 +138,7 @@ export class ClamAVClient {
 
         return parsedCommand;
     }
+
+    private static readonly DEFAULT_TIMEOUT_IN_MS: number = 5000;
 
 }
