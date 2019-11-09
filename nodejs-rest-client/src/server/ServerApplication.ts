@@ -4,8 +4,8 @@ import { RootModule } from '../module/RootModule';
 import * as path from 'path';
 import * as fs from 'fs';
 import { ReadStream } from 'fs';
-import { ClamAVScanDetails } from '../core/util/clamav/types/ClamAVScanDetails';
-import { ClamAVTCPClient } from '../core/util/clamav/ClamAVTCPClient';
+import { ClamAVClient } from '../core/lib/clamav/client/ClamAVClient';
+import { ClamAVScanDetails } from '../core/lib/clamav/client/types/ClamAVScanDetails';
 
 export class ServerApplication {
 
@@ -28,12 +28,15 @@ export class ServerApplication {
         const infectedFilePath: string = path.normalize(__dirname + '/static/infected-file.txt');
         const infectedFileReadStream: ReadStream = fs.createReadStream(infectedFilePath);
 
-        const infectedScanDetails: ClamAVScanDetails = await ClamAVTCPClient.scanStream(infectedFileReadStream);
+        const infectedScanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(infectedFileReadStream);
 
         const cleanFilePath: string = path.normalize(__dirname + '/static/clean-file.txt');
         const cleanFileReadStream: ReadStream = fs.createReadStream(cleanFilePath);
 
-        const cleanScanDetails: ClamAVScanDetails = await ClamAVTCPClient.scanStream(cleanFileReadStream);
+        const cleanScanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(cleanFileReadStream);
+
+        console.log(await ClamAVClient.ping());
+        console.log(await ClamAVClient.getVersion());
 
         console.log(infectedScanDetails);
         console.log(cleanScanDetails);

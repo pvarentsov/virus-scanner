@@ -1,10 +1,8 @@
-import { ClamAVScanDetails } from '../types/ClamAVScanDetails';
-import { ClamAVScanStatus } from '../types/ClamAVScanStatus';
 import { Transform, TransformCallback } from 'stream';
 
-export class ClamAVTCPClientHelper {
+export class ClamAVCommandDataTransformer {
 
-    public static transformReadStreamToClamAVInstream = (): Transform => {
+    public static readonly INSTREAM = (): Transform => {
         const transform: Transform = new Transform();
 
         transform._transform = (chunk: Buffer, encoding: string, callback: TransformCallback): void => {
@@ -29,20 +27,6 @@ export class ClamAVTCPClientHelper {
         };
 
         return transform;
-    }
-
-    public static parseScanDetails(message: string): ClamAVScanDetails {
-        const parsedMessage: string = message
-            .replace('\u0000', '')
-            .replace('stream: ', '')
-            .replace('FOUND', 'found')
-            .replace('OK', 'Ok');
-
-        const status: ClamAVScanStatus = message.includes('OK') && !message.includes('FOUND')
-            ? ClamAVScanStatus.CLEAN
-            : ClamAVScanStatus.INFECTED;
-
-        return { message: parsedMessage, status: status };
     }
 
 }
