@@ -64,7 +64,7 @@ export class ClamAVClient {
     }
 
     private async sendCommand(): Promise<string> {
-        return new Promise((resolve: ResolveCallback, reject: RejectCallback): void => {
+        return new Promise((resolve: (value: string) => void, reject: (error: Error) => void): void => {
 
             const connectTimer: NodeJS.Timeout = setTimeout(
                 () => socket.destroy(new Error('Timeout connecting to server')),
