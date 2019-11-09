@@ -84,7 +84,6 @@ export class ClamAVCommandFactory {
     private static readonly commandPostfix: string = '\0';
 
     private static readonly commandRules: ClamAVCommandRules = {
-
         [ClamaAVCommandType.PING]: {
             needPrefix : false,
             needPostfix: false,
@@ -102,13 +101,10 @@ export class ClamAVCommandFactory {
             needPostfix: true,
             needData   : true,
         },
-
     };
 
     private static readonly dataTransformers: ClamAVDataTransformers = {
-
-        [ClamaAVCommandType.INSTREAM]: ClamAVCommandDataTransformer.INSTREAM
-
+        [ClamaAVCommandType.INSTREAM]: ClamAVCommandDataTransformer.INSTREAM,
     };
 
 }
