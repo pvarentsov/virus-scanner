@@ -16,12 +16,12 @@ export class ClamAVClientResponseParser {
             ? ClamAVScanStatus.CLEAN
             : ClamAVScanStatus.INFECTED;
 
-        return { message: parsedMessage, status: status };
+        return { Message: parsedMessage, Status: status };
     }
 
     public static parsePingDetails(message: string): ClamAVPingDetails {
         const parsedMessage: string = message.replace('\n', '');
-        return { message: parsedMessage };
+        return { Message: parsedMessage };
     }
 
     public static parseVersionDetails(message: string): ClamAVVersionDetails {

@@ -2,7 +2,7 @@ import { ClamAVScanStatus } from './ClamAVScanStatus';
 
 export type ClamAVScanDetails = {
 
-    message: string;
+    Message: string;
 
-    status: ClamAVScanStatus
+    Status: ClamAVScanStatus
 };

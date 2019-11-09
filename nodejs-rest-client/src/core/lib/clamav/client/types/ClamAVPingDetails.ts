@@ -1,5 +1,5 @@
 export type ClamAVPingDetails = {
 
-    message: string;
+    Message: string;
 
 };
