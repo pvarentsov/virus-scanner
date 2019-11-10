@@ -1,4 +1,3 @@
-import { IClamAVCommand } from '../command/IClamAVCommand';
 import { Readable } from 'stream';
 import * as net from 'net';
 import { Socket } from 'net';
@@ -8,8 +7,9 @@ import { ClamAVScanDetails } from './types/ClamAVScanDetails';
 import { ClamAVPingDetails } from './types/ClamAVPingDetails';
 import { ClamAVVersionDetails } from './types/ClamAVVersionDetails';
 import { ClamAVClientResponseParser } from './parser/ClamAVClientResponseParser';
-import { ClamAVClientError } from './error/ClamAVClientError';
+import { ClamAVClientError } from './errors/ClamAVClientError';
 import { ClamAVConnectionOptions } from './types/ClamAVConnectionOptions';
+import { ClamAVCommand } from '../command/types/ClamAVCommand';
 
 export class ClamAVClient {
 
@@ -25,7 +25,7 @@ export class ClamAVClient {
 
     private readonly commandResponseChunks: Buffer[];
 
-    private constructor(host: string, port: number, timeoutInMs: number | undefined, command: IClamAVCommand) {
+    private constructor(host: string, port: number, timeoutInMs: number | undefined, command: ClamAVCommand) {
         this.host = host;
         this.port = port;
         this.timeoutInMs = timeoutInMs || ClamAVClient.DEFAULT_TIMEOUT_IN_MS;
@@ -39,7 +39,7 @@ export class ClamAVClient {
     }
 
     public static async scanStream(stream: Readable, options: ClamAVConnectionOptions): Promise<ClamAVScanDetails> {
-        const command: IClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.INSTREAM, stream);
+        const command: ClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.INSTREAM, stream);
         const client: ClamAVClient = new ClamAVClient(options.host, options.port, options.timeoutInMs, command);
 
         const responseMessage: string = await client.sendCommand();
@@ -48,7 +48,7 @@ export class ClamAVClient {
     }
 
     public static async ping(options: ClamAVConnectionOptions): Promise<ClamAVPingDetails> {
-        const command: IClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.PING);
+        const command: ClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.PING);
         const client: ClamAVClient = new ClamAVClient(options.host, options.port, options.timeoutInMs, command);
 
         const responseMessage: string = await client.sendCommand();
@@ -57,7 +57,7 @@ export class ClamAVClient {
     }
 
     public static async getVersion(options: ClamAVConnectionOptions): Promise<ClamAVVersionDetails> {
-        const command: IClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.VERSION);
+        const command: ClamAVCommand = ClamAVCommandFactory.createCommand(ClamaAVCommandType.VERSION);
         const client: ClamAVClient = new ClamAVClient(options.host, options.port, options.timeoutInMs, command);
 
         const responseMessage: string = await client.sendCommand();
@@ -126,7 +126,7 @@ export class ClamAVClient {
         });
     }
 
-    private static parseCommand(command: IClamAVCommand): string {
+    private static parseCommand(command: ClamAVCommand): string {
         let parsedCommand: string = command.name;
 
         if (command.prefix) {

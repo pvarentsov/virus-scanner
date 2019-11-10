@@ -1,8 +1,8 @@
 import { ClamaAVCommandType } from '../types/ClamaAVCommandType';
 import { Readable, Transform } from 'stream';
-import { IClamAVCommand } from '../IClamAVCommand';
-import { ClamAVCommandFactoryError } from './error/ClamAVCommandFactoryError';
+import { ClamAVCommandFactoryError } from './errors/ClamAVCommandFactoryError';
 import { ClamAVCommandDataTransformer } from '../data-transformer/ClamAVCommandDataTransformer';
+import { ClamAVCommand } from '../types/ClamAVCommand';
 
 export class ClamAVCommandFactory {
 
@@ -30,11 +30,11 @@ export class ClamAVCommandFactory {
         }
     }
 
-    public static createCommand(commandType: ClamaAVCommandType, data?: Readable): IClamAVCommand {
+    public static createCommand(commandType: ClamaAVCommandType, data?: Readable): ClamAVCommand {
         const commandFactory: ClamAVCommandFactory = new ClamAVCommandFactory(commandType, data);
         commandFactory.validateCommand();
 
-        const command: IClamAVCommand = {
+        const command: ClamAVCommand = {
             name   : commandType,
             prefix : commandFactory.commandPrefix,
             postfix: commandFactory.commandPostfix,

@@ -1,4 +1,3 @@
-/* tslint:disable */
+declare type ResolveCallback<T> = (value: T) => void;
 
-declare type ResolveCallback = (value: any) => void;
 declare type RejectCallback = (error: Error) => void;

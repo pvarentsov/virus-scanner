@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 
-export interface IClamAVCommand {
+export type ClamAVCommand = {
 
     name: string;
 
@@ -10,4 +10,4 @@ export interface IClamAVCommand {
 
     data?: Readable;
 
-}
+};
