@@ -1,4 +1,4 @@
-import { ServerApplication } from './server/ServerApplication';
+import { ServerApplication } from './infrastructure/server/ServerApplication';
 
 (async (): Promise<void> => {
     const serverApplication: ServerApplication = ServerApplication.create();
