@@ -1,7 +1,7 @@
 import { ServiceInputParameters, ServiceOutputParameters } from '..';
 
-export interface IService {
+export interface IService<TInput extends ServiceInputParameters | undefined, TOutput extends ServiceOutputParameters | undefined> {
 
-    execute<TInput extends ServiceInputParameters, TOutput extends ServiceOutputParameters>(inputParameters: TInput): Promise<TOutput>;
+    execute(inputParameters: TInput): Promise<TOutput>;
 
 }

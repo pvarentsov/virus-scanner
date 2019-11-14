@@ -1,17 +1,21 @@
 import { ClamAVClient, ClamAVScanDetails } from '../../../core/lib/clamav';
-import { SyncScanInputParameters, SyncScanOutputParameters } from '../..';
+import { IService } from '../../../core/service';
+import { Injectable } from '@nestjs/common';
+import { SyncScanInputParameters, SyncScanOutputParameters } from '..';
 
-// TODO: Research problem with implementing of the IService
-
-export class SyncScanService {
+@Injectable()
+export class SyncScanService implements IService<SyncScanInputParameters, SyncScanOutputParameters> {
 
     public async execute(inputParameters: SyncScanInputParameters): Promise<SyncScanOutputParameters> {
+
+        // TODO: Add config provider
+
         const clamAVHost: string = 'localhost';
         const clamAVPort: number = 3310;
 
         const scanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(inputParameters.file, { host: clamAVHost, port: clamAVPort });
 
-        return SyncScanOutputParameters.create(scanDetails.Message, scanDetails.Status);
+        return SyncScanOutputParameters.create(scanDetails);
     }
 
 }
