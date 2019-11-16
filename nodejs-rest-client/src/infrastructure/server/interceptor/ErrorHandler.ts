@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
 import { Response } from 'express';
 import { ServerResponse, ServerResponseCode } from '../response';
-import { ServiceInputParametersValidationDetails, ServiceInputParametersValidationError } from '../../core/service';
+import { ServiceInputParametersValidationDetails, ServiceInputParametersValidationError } from '../../../core/service';
 
 @Catch()
 export class ErrorHandler implements ExceptionFilter {

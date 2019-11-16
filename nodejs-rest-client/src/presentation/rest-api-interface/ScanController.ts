@@ -10,7 +10,7 @@ import * as Busboy from 'busboy';
 import { Request } from 'express';
 import { Readable } from 'stream';
 import { ScanTokens } from '../../infrastructure/module/scanner/ScanTokens';
-import { ServerResponse, ServerResponseCode } from '../../infrastructure/response';
+import { ServerResponse, ServerResponseCode } from '../../infrastructure/server/response';
 import IBusboy = busboy.Busboy;
 
 @Controller('scanner')
