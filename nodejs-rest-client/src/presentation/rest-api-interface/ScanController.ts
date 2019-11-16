@@ -10,6 +10,7 @@ import * as Busboy from 'busboy';
 import { Request } from 'express';
 import { Readable } from 'stream';
 import { ScanTokens } from '../../infrastructure/module/scanner/ScanTokens';
+import { ServerResponse, ServerResponseCode } from '../../infrastructure/response';
 import IBusboy = busboy.Busboy;
 
 @Controller('scanner')
@@ -20,46 +21,77 @@ export class ScanController {
         private readonly syncScanService: IService<SyncScanInputParameters, SyncScanOutputParameters>,
 
         @Inject(ScanTokens.PingScannerVersionService)
-        private readonly pingScannerService: IService<undefined, PingScannerOutputParameters>,
+        private readonly pingScannerService: IService<void, PingScannerOutputParameters>,
 
         @Inject(ScanTokens.GetScannerVersionService)
-        private readonly getScannerVersionService: IService<undefined, GetScannerVersionOutputParameters>,
+        private readonly getScannerVersionService: IService<void, GetScannerVersionOutputParameters>,
     ) {}
 
     @Post('sync-scan')
-    public async syncScan(@Req() request: Request): Promise<SyncScanOutputParameters> {
-        return new Promise((resolve: ResolveCallback<SyncScanOutputParameters>, reject: RejectCallback): void => {
-            const busboy: IBusboy = new Busboy({headers: request.headers, limits: {files: 1}});
+    public async syncScan(@Req() request: Request): Promise<ServerResponse> {
+        return new Promise(
+            (resolve: ResolveCallback<ServerResponse>, reject: RejectCallback): void => {
 
-            busboy.on('file', async (fieldName: string, fileInputStream: Readable): Promise<void> => {
-                try {
-                    const fileSize: number = parseInt(request.headers['content-length']!, 10);
+                const busboy: IBusboy = new Busboy({ headers: request.headers, limits: { files: 1 } });
+                const fieldNames: string[] = [];
 
-                    const syncScanInputParameters: SyncScanInputParameters
-                        = await SyncScanInputParameters.create(fileInputStream, fileSize);
+                busboy.on('file', async (fieldName: string, fileInputStream: Readable): Promise<void> => {
+                    try {
+                        fieldNames.push(fieldName);
 
-                    const syncScanOutputParameters: SyncScanOutputParameters
-                        = await this.syncScanService.execute(syncScanInputParameters);
+                        const fileSize: number = parseInt(request.headers['content-length']!, 10);
 
-                    resolve(syncScanOutputParameters);
+                        const syncScanInputParameters: SyncScanInputParameters
+                            = await SyncScanInputParameters.create(fileInputStream, fileSize);
 
-                } catch (err) {
-                    fileInputStream.resume();
-                    reject(err);
-                }
-            });
+                        const syncScanOutputParameters: SyncScanOutputParameters
+                            = await this.syncScanService.execute(syncScanInputParameters);
 
-            request.pipe(busboy);
-        });
+                        const response: ServerResponse = ServerResponse.createSuccessResponse(syncScanOutputParameters);
+
+                        resolve(response);
+
+                    } catch (err) {
+                        fileInputStream.resume();
+                        reject(err);
+                    }
+                });
+
+                this.handleBusboyFinishEvent(busboy, fieldNames, resolve);
+
+                request.pipe(busboy);
+            }
+        );
     }
 
     @Post('ping')
-    public async ping(): Promise<PingScannerOutputParameters> {
-        return this.pingScannerService.execute(undefined);
+    public async ping(): Promise<ServerResponse> {
+        const pingDetails: PingScannerOutputParameters = await this.pingScannerService.execute();
+        return ServerResponse.createSuccessResponse(pingDetails);
     }
 
     @Get('version')
-    public async getVersion(): Promise<GetScannerVersionOutputParameters> {
-        return this.getScannerVersionService.execute(undefined);
+    public async getVersion(): Promise<ServerResponse> {
+        const versionDetails: GetScannerVersionOutputParameters = await this.getScannerVersionService.execute();
+        return ServerResponse.createSuccessResponse(versionDetails);
+    }
+
+    private handleBusboyFinishEvent = (
+        busboy: IBusboy,
+        fieldNames: string[],
+        resolve: ResolveCallback<ServerResponse>
+
+    ): void => {
+
+        busboy.on('finish', (): void => {
+            if (fieldNames.length === 0) {
+                const response: ServerResponse = ServerResponse.createErrorResponse(
+                    ServerResponseCode.REQUEST_VALIDATION_ERROR.code,
+                    `Multipart form does't contain file`
+                );
+
+                resolve(response);
+            }
+        });
     }
 }
