@@ -17,14 +17,14 @@ export class ServerResponse {
         this.timestamp = Date.now();
     }
 
-    public static createSuccessResponse<T extends object>(data?: {}, message?: string): ServerResponse {
+    public static createSuccessResponse(data?: {}, message?: string): ServerResponse {
         const resultCode: number = ServerResponseCode.SUCCESS.code;
         const resultMessage: string = message || ServerResponseCode.SUCCESS.message;
 
         return new ServerResponse(resultCode, resultMessage, data);
     }
 
-    public static createErrorResponse<T extends object>(code?: number, message?: string, data?: {}): ServerResponse {
+    public static createErrorResponse(code?: number, message?: string, data?: {}): ServerResponse {
         const resultCode: number = code || ServerResponseCode.INTERNAL_ERROR.code;
         const resultMessage: string = message || ServerResponseCode.INTERNAL_ERROR.message;
 
