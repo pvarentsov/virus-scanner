@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { PingScannerOutputParameters } from '..';
 
 @Injectable()
-export class PingScannerVersionService implements IService<undefined, PingScannerOutputParameters> {
+export class PingScannerVersionService implements IService<void, PingScannerOutputParameters> {
 
     public async execute(): Promise<PingScannerOutputParameters> {
 

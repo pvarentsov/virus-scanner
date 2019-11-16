@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 import { GetScannerVersionOutputParameters } from '..';
 
 @Injectable()
-export class GetScannerVersionService implements IService<undefined, GetScannerVersionOutputParameters> {
+export class GetScannerVersionService implements IService<void, GetScannerVersionOutputParameters> {
 
     public async execute(): Promise<GetScannerVersionOutputParameters> {
 
