@@ -1,4 +1,4 @@
-import { ClamAVClient, ClamAVVersionDetails } from '../../../core/lib/clamav';
+import { ClamAVClient, ClamAVConnectionOptions, ClamAVVersionDetails } from '../../../core/lib/clamav';
 import { IService } from '../../../core/service';
 import { Injectable } from '@nestjs/common';
 import { GetScannerVersionOutputParameters } from '..';
@@ -10,10 +10,8 @@ export class GetScannerVersionService implements IService<undefined, GetScannerV
 
         // TODO: Add config provider
 
-        const clamAVHost: string = 'localhost';
-        const clamAVPort: number = 3310;
-
-        const versionDetails: ClamAVVersionDetails = await ClamAVClient.getVersion({ host: clamAVHost, port: clamAVPort });
+        const connectionOptions: ClamAVConnectionOptions = { host: 'localhost', port: 3310 };
+        const versionDetails: ClamAVVersionDetails = await ClamAVClient.getVersion(connectionOptions);
 
         return GetScannerVersionOutputParameters.create(versionDetails);
     }

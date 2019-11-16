@@ -46,10 +46,14 @@ export class ClamAVCommandFactory {
 
     private validateCommand(): void {
         if (!this.data && this.commandRule.needData) {
-            throw ClamAVCommandFactoryError.createCommandValidationError({ commandType: this.commandType, needData: true });
+            throw ClamAVCommandFactoryError.createCommandValidationError(
+                { commandType: this.commandType, needData: true }
+            );
         }
         if (this.data && !this.commandRule.needData) {
-            throw ClamAVCommandFactoryError.createCommandValidationError({ commandType: this.commandType, needData: false });
+            throw ClamAVCommandFactoryError.createCommandValidationError(
+                { commandType: this.commandType, needData: false }
+            );
         }
     }
 

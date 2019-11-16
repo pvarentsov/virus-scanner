@@ -1,4 +1,4 @@
-import { ClamAVClient, ClamAVScanDetails } from '../../../core/lib/clamav';
+import { ClamAVClient, ClamAVConnectionOptions, ClamAVScanDetails } from '../../../core/lib/clamav';
 import { IService } from '../../../core/service';
 import { Injectable } from '@nestjs/common';
 import { SyncScanInputParameters, SyncScanOutputParameters } from '..';
@@ -10,10 +10,8 @@ export class SyncScanService implements IService<SyncScanInputParameters, SyncSc
 
         // TODO: Add config provider
 
-        const clamAVHost: string = 'localhost';
-        const clamAVPort: number = 3310;
-
-        const scanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(inputParameters.file, { host: clamAVHost, port: clamAVPort });
+        const connectionOptions: ClamAVConnectionOptions = { host: 'localhost', port: 3310 };
+        const scanDetails: ClamAVScanDetails = await ClamAVClient.scanStream(inputParameters.file, connectionOptions);
 
         return SyncScanOutputParameters.create(scanDetails);
     }

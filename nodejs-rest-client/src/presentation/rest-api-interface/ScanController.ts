@@ -35,8 +35,11 @@ export class ScanController {
                 try {
                     const fileSize: number = parseInt(request.headers['content-length']!, 10);
 
-                    const syncScanInputParameters: SyncScanInputParameters = await SyncScanInputParameters.create(fileInputStream, fileSize);
-                    const syncScanOutputParameters: SyncScanOutputParameters = await this.syncScanService.execute(syncScanInputParameters);
+                    const syncScanInputParameters: SyncScanInputParameters
+                        = await SyncScanInputParameters.create(fileInputStream, fileSize);
+
+                    const syncScanOutputParameters: SyncScanOutputParameters
+                        = await this.syncScanService.execute(syncScanInputParameters);
 
                     resolve(syncScanOutputParameters);
 

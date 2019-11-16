@@ -13,7 +13,11 @@ export class ClamAVCommandFactoryError extends Error {
         Error.captureStackTrace(this, this.constructor);
     }
 
-    public static createCommandValidationError(options: { commandType: ClamaAVCommandType, needData: boolean }): ClamAVCommandFactoryError {
+    public static createCommandValidationError(
+        options: { commandType: ClamaAVCommandType, needData: boolean }
+
+    ): ClamAVCommandFactoryError {
+
         let message: string = `${options.commandType} command require the data`;
 
         if (!options.needData) {

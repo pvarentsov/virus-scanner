@@ -1,7 +1,5 @@
-import { ClamAVScanDetails } from '../types/ClamAVScanDetails';
+import { ClamAVPingDetails, ClamAVScanDetails, ClamAVVersionDetails } from '../..';
 import { ClamAVScanStatus } from '../types/ClamAVScanStatus';
-import { ClamAVPingDetails } from '../types/ClamAVPingDetails';
-import { ClamAVVersionDetails } from '../types/ClamAVVersionDetails';
 
 export class ClamAVClientResponseParser {
 
@@ -59,7 +57,12 @@ export class ClamAVClientResponseParser {
                 .replace('\n', '');    
         }
 
-        return { ClamAV: clamAVVersion, SignatureDatabase: { version: signatureDatabaseVersion, buildTime: signatureDatabaseBuildTime } };
+        const versionDetails: ClamAVVersionDetails = {
+            ClamAV           : clamAVVersion,
+            SignatureDatabase: { version: signatureDatabaseVersion, buildTime: signatureDatabaseBuildTime}
+        };
+
+        return versionDetails;
     }
 
 }

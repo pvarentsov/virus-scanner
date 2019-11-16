@@ -11,7 +11,11 @@ export class GetScannerVersionOutputParameters extends ServiceOutputParameters {
         super();
 
         this.clamAV = versionDetails.ClamAV;
-        this.signatureDatabase = { version: versionDetails.SignatureDatabase.version, buildTime: versionDetails.SignatureDatabase.buildTime };
+
+        this.signatureDatabase = {
+            version  : versionDetails.SignatureDatabase.version,
+            buildTime: versionDetails.SignatureDatabase.buildTime
+        };
     }
 
     public static create(versionDetails: ClamAVVersionDetails): GetScannerVersionOutputParameters {
