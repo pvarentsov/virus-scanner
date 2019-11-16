@@ -87,7 +87,7 @@ export class ScanController {
             if (fieldNames.length === 0) {
                 const response: ServerResponse = ServerResponse.createErrorResponse(
                     ServerResponseCode.REQUEST_VALIDATION_ERROR.code,
-                    `Multipart form does't contain file`
+                    `Multipart form is empty.`
                 );
 
                 resolve(response);
