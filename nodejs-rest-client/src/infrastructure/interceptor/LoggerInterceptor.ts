@@ -18,7 +18,11 @@ export class LoggerInterceptor implements NestInterceptor {
             .pipe(
                 tap(() => {
                     const requestFinishDate: number = Date.now();
-                    const message: string = `Method: ${request.method}; Path: ${request.path}; SpentTime: ${requestFinishDate - requestStartDate}ms`;
+
+                    const message: string =
+                        `Method: ${request.method}; ` +
+                        `Path: ${request.path}; ` +
+                        `SpentTime: ${requestFinishDate - requestStartDate}ms`;
 
                     CoreLogger.log(message, LoggerInterceptor.name);
                 })

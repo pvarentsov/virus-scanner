@@ -19,7 +19,10 @@ export class ErrorHandlerInterceptor implements ExceptionFilter {
         errorResponse = this.handleRequestValidationError(error, errorResponse);
         errorResponse = this.handleClamAVError(error, errorResponse);
 
-        const message: string = `Method: ${request.method}; Path: ${request.path};`;
+        const message: string =
+            `Method: ${request.method}; ` +
+            `Path: ${request.path};`;
+
         CoreLogger.error(message, error.stack, ErrorHandlerInterceptor.name);
 
         response.json(errorResponse);
