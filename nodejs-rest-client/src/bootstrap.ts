@@ -1,4 +1,3 @@
-import './env';
 import { ServerApplication } from './infrastructure/server/ServerApplication';
 
 (async (): Promise<void> => {
