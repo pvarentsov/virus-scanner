@@ -2,6 +2,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { RootModule } from '../module/RootModule';
 import { Config } from '../../core/configuration';
+import { CoreLogger } from '../../core/logger/CoreLogger';
 
 export class ServerApplication {
 
@@ -14,10 +15,14 @@ export class ServerApplication {
     }
 
     public async bootstrap(): Promise<void> {
-        const app: NestExpressApplication = await NestFactory.create<NestExpressApplication>(RootModule);
+        const app: NestExpressApplication = await NestFactory.create<NestExpressApplication>(
+            RootModule,
+            { logger: new CoreLogger() }
+        );
+
         await app.listen(this.port, this.host);
 
-        console.log(`\nServer started on port: ${this.port}; PID: ${process.pid}`);
+        CoreLogger.log(`Server started on host: ${this.host}; port: ${this.port};`, ServerApplication.name);
     }
 
 }

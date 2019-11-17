@@ -12,6 +12,8 @@ export class Config {
 
     public static readonly CLAMAV_TIMEOUT: number = Config.getVariable<number>('CLAMAV_TIMEOUT', { type: 'number' });
 
+    public static readonly LOG_FORMAT: 'TEXT' | 'JSON' = Config.getVariable<'TEXT' | 'JSON'>('LOG_FORMAT', { type: 'string' });
+
     private static getVariable<T = (string | number)>(variable: string, options: { type: 'string' | 'number' }): T {
         const value: string | undefined = process.env[variable];
 

@@ -10,7 +10,8 @@ import * as Busboy from 'busboy';
 import { Request } from 'express';
 import { Readable } from 'stream';
 import { ScanTokens } from '../../infrastructure/module/scanner/ScanTokens';
-import { ServerResponse, ServerResponseCode } from '../../infrastructure/server/response';
+import { ServerResponse } from '../../infrastructure/response';
+import { RequestValidationError } from '../../core/base-errors/RequestValidationError';
 import IBusboy = busboy.Busboy;
 
 @Controller('scanner')
@@ -57,7 +58,7 @@ export class ScanController {
                     }
                 });
 
-                this.handleBusboyFinishEvent(busboy, fieldNames, resolve);
+                this.handleBusboyFinishEvent(busboy, fieldNames, reject);
 
                 request.pipe(busboy);
             }
@@ -79,18 +80,13 @@ export class ScanController {
     private handleBusboyFinishEvent = (
         busboy: IBusboy,
         fieldNames: string[],
-        resolve: ResolveCallback<ServerResponse>
+        reject: RejectCallback
 
     ): void => {
 
         busboy.on('finish', (): void => {
             if (fieldNames.length === 0) {
-                const response: ServerResponse = ServerResponse.createErrorResponse(
-                    ServerResponseCode.REQUEST_VALIDATION_ERROR.code,
-                    `Multipart form is empty.`
-                );
-
-                resolve(response);
+                reject(RequestValidationError.create(`Multipart form is empty.`));
             }
         });
     }

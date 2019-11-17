@@ -1,12 +1,17 @@
 import { Module } from '@nestjs/common';
-import { APP_FILTER } from '@nestjs/core';
-import { ErrorHandler } from '../../server/interceptor/ErrorHandler';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { ErrorHandlerInterceptor } from '../../interceptor/ErrorHandlerInterceptor';
+import { LoggerInterceptor } from '../../interceptor/LoggerInterceptor';
 
 @Module({
     providers: [
         {
             provide : APP_FILTER,
-            useClass: ErrorHandler,
+            useClass: ErrorHandlerInterceptor,
+        },
+        {
+            provide : APP_INTERCEPTOR,
+            useClass: LoggerInterceptor,
         },
     ]
 })
