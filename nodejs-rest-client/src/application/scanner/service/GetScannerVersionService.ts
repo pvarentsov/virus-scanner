@@ -2,15 +2,18 @@ import { ClamAVClient, ClamAVConnectionOptions, ClamAVVersionDetails } from '../
 import { IService } from '../../../core/service';
 import { Injectable } from '@nestjs/common';
 import { GetScannerVersionOutputParameters } from '..';
+import { Config } from '../../../core/configuration';
 
 @Injectable()
 export class GetScannerVersionService implements IService<void, GetScannerVersionOutputParameters> {
 
     public async execute(): Promise<GetScannerVersionOutputParameters> {
+        const connectionOptions: ClamAVConnectionOptions = {
+            host       : Config.CLAMAV_HOST,
+            port       : Config.CLAMAV_PORT,
+            timeoutInMs: Config.CLAMAV_TIMEOUT,
+        };
 
-        // TODO: Add config provider
-
-        const connectionOptions: ClamAVConnectionOptions = { host: 'localhost', port: 3310 };
         const versionDetails: ClamAVVersionDetails = await ClamAVClient.getVersion(connectionOptions);
 
         return GetScannerVersionOutputParameters.create(versionDetails);

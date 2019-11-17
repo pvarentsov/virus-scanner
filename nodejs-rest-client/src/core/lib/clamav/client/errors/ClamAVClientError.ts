@@ -12,7 +12,7 @@ export class ClamAVClientError extends Error {
     }
 
     public static createConnectionTimedOutError(): ClamAVClientError {
-        const message: string = 'Connection to ClamAV timed out';
+        const message: string = 'Connection to ClamAV timed out.';
         return new ClamAVClientError(message);
     }
 
@@ -20,7 +20,7 @@ export class ClamAVClientError extends Error {
         let message: string = `Scan aborted:`;
 
         if (reason.length > 0) {
-            message = message + ` Reason: ${reason}`;
+            message = message + ` Reason: ${reason}.`;
         }
 
         return new ClamAVClientError(message);
