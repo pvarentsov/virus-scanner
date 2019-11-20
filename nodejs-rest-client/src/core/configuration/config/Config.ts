@@ -14,10 +14,12 @@ export class Config {
 
     public static readonly LOG_FORMAT: 'TEXT' | 'JSON' = Config.getVariable<'TEXT' | 'JSON'>('LOG_FORMAT', { type: 'string' });
 
+    public static readonly LOG_DISABLE_COLORS: number = Config.getVariable<number>('LOG_DISABLE_COLORS', { type: 'number' });
+
     private static getVariable<T = (string | number)>(variable: string, options: { type: 'string' | 'number' }): T {
         const value: string | undefined = process.env[variable];
 
-        if (!value) {
+        if (value === undefined) {
             throw ConfigError.createVariableNotSetError(variable);
         }
 
@@ -27,7 +29,7 @@ export class Config {
         if (options.type === 'number') {
             parsedValue = parseInt(parsedValue, 10);
 
-            if (!parsedValue) {
+            if (typeof parsedValue !== 'number') {
                 throw ConfigError.createVariableParsingError(variable);
             }
         }
