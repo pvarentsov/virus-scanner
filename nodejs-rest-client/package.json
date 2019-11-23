@@ -7,8 +7,9 @@
   "scripts": {
     "install:all": "./scripts/yarn-install.sh",
     "build": "./scripts/compiler.sh",
+    "copy:env": "cp ./env/.env ./dist/",
     "start": "node ./dist/bootstrap.js",
-    "start:load-env": "cd ./dist && node -r dotenv/config . dotenv_config_path=.env bootstrap.js",
+    "start:env": "yarn copy:env && cd ./dist && node -r dotenv/config . dotenv_config_path=.env bootstrap.js",
     "lint": "./node_modules/.bin/tslint --project tsconfig.json --config tslint.json"
   },
   "devDependencies": {
