@@ -13,7 +13,6 @@ import { CoreLogger } from './core/logger';
         await spawnWorkers();
         await runApplicationOnWorkers();
     }
-
 })();
 
 async function runApplication(): Promise<void> {
@@ -38,6 +37,7 @@ async function spawnWorkers(): Promise<void> {
                 `is down with ${codeMessagePart}; ${signalMessagePart}`;
 
             CoreLogger.error(errorMassage);
+
             fork();
         });
     }
