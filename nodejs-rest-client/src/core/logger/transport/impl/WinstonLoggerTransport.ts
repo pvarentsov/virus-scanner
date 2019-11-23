@@ -4,39 +4,59 @@ import { Config } from '../../../configuration';
 
 export class WinstonLoggerTransport implements ILoggerTransport {
 
-    private logger: Logger;
+    private readonly logger: Logger;
+
+    private readonly pid: number;
 
     private constructor() {
+        this.pid = process.pid;
         this.logger = createLogger(WinstonLoggerTransport.OPTIONS);
     }
 
     public log(message: string, context?: string): void {
-        this.logger.info(message, { context });
+        this.logger.info(message, {
+            context: context || WinstonLoggerTransport.DEFAULT_CONTEXT,
+            pid    : this.pid
+        });
     }
 
     public error(message: string, trace?: string, context?: string): void {
-        this.logger.error(message, { context, trace });
+        this.logger.error(message, {
+            context: context || WinstonLoggerTransport.DEFAULT_CONTEXT,
+            trace  : trace,
+            pid    : this.pid
+        });
     }
 
     public warn(message: string, context?: string): void {
-        this.logger.warn(message, { context });
+        this.logger.warn(message, {
+            context: context || WinstonLoggerTransport.DEFAULT_CONTEXT,
+            pid    : this.pid
+        });
     }
 
     public debug(message: string, context?: string): void {
-        this.logger.debug(message, { context });
+        this.logger.debug(message, {
+            context: context || WinstonLoggerTransport.DEFAULT_CONTEXT,
+            pid    : this.pid
+        });
     }
 
     public verbose(message: string, context?: string): void {
-        this.logger.verbose(message, { context });
+        this.logger.verbose(message, {
+            context: context || WinstonLoggerTransport.DEFAULT_CONTEXT,
+            pid    : this.pid });
     }
 
     public static create(): WinstonLoggerTransport {
         return new WinstonLoggerTransport();
     }
 
+    private static readonly DEFAULT_CONTEXT: string = 'Global';
+
     private static readonly OPTIONS: LoggerOptions = {
-        transports : [ new transports.Console({}) ],
-        format     : format.combine(
+        transports: [ new transports.Console({}) ],
+        format    : format.combine(
             format.timestamp({ format: `MM/DD/YYYY HH:mm:ss` }),
             WinstonLoggerTransport.chooseLogColor(),
             WinstonLoggerTransport.chooseLogFormat(),
@@ -46,32 +66,34 @@ export class WinstonLoggerTransport implements ILoggerTransport {
     /*tslint:disable-next-line*/
     private static buildMessageTemplate(info: any): string {
         const timestamp: string = `[${info.timestamp}]`;
-        const level: string = `${WinstonLoggerTransport.alignLevel(info.level)} - `;
-        const context: string = `[${info.context || 'Global'}]`;
+
+        const level: string = `${WinstonLoggerTransport.alignValue(info.level, 7)}`;
+        const pid: string = WinstonLoggerTransport.alignValue(`[${info.pid}]`, 8);
+
+        const context: string = `[${info.context}]`;
         const message: string = `${info.message}`;
         const trace: string = info.trace ? `\n\n${info.trace}\n` : '';
 
-        return `${timestamp} ${level} ${context} ${message}${trace}`;
+        return `${timestamp} ${pid} ${level} ${context} ${message}${trace}`;
     }
 
-    private static alignLevel(level: string): string {
+    private static alignValue(value: string | number, maxWidth: number): string {
         const colorRegexp: RegExp = new RegExp(
             `[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]`, 'g'
         );
 
-        const parsedLevel: string = level.replace(colorRegexp, '');
+        const parsedValue: string = `${value}`.replace(colorRegexp, '');
 
-        const maxLevelLength: number = 8;
-        const levelLength: number = parsedLevel.length;
-        const lengthDiff: number = maxLevelLength - levelLength;
+        const valueLength: number = parsedValue.length;
+        const lengthDiff: number = maxWidth - valueLength;
 
-        let resultLevel: string = level;
+        let resultValue: string = `${value}`;
 
         if (lengthDiff > 0) {
-            resultLevel = resultLevel.padEnd(resultLevel.length + lengthDiff);
+            resultValue = resultValue.padEnd(resultValue.length + lengthDiff);
         }
 
-        return resultLevel;
+        return resultValue;
     }
 
     /*tslint:disable-next-line*/

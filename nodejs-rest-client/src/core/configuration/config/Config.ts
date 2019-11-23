@@ -6,6 +6,8 @@ export class Config {
 
     public static readonly API_PORT: number = Config.getVariable<number>('API_PORT', { type: 'number' });
 
+    public static readonly API_CLUSTER_ENABLE: number = Config.getVariable<number>('API_CLUSTER_ENABLE', { type: 'number' });
+
     public static readonly CLAMAV_HOST: string = Config.getVariable<string>('CLAMAV_HOST', { type: 'string' });
 
     public static readonly CLAMAV_PORT: number = Config.getVariable<number>('CLAMAV_PORT', { type: 'number' });

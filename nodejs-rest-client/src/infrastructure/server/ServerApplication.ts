@@ -17,7 +17,7 @@ export class ServerApplication {
     public async bootstrap(): Promise<void> {
         const app: NestExpressApplication = await NestFactory.create<NestExpressApplication>(
             RootModule,
-            { logger: new CoreLogger() }
+            { logger: Config.API_CLUSTER_ENABLE ? false : new CoreLogger() }
         );
 
         await app.listen(this.port, this.host);
@@ -27,10 +27,6 @@ export class ServerApplication {
 
     public log(): void {
         CoreLogger.log(`Server started on host: ${this.host}; port: ${this.port};`, ServerApplication.name);
-        CoreLogger.debug(`Debug level is enable`);
-        CoreLogger.verbose(`Verbose level is enable`);
-        CoreLogger.warn(`Warn level is enable`);
-        CoreLogger.error(`Error level is enable`);
     }
 
 }
