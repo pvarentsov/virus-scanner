@@ -4,8 +4,8 @@ import { ServerResponse, ServerResponseCode } from '../response';
 import { ServiceInputParametersValidationDetails, ServiceInputParametersValidationError } from '../../core/service';
 import { ClamAVClientError } from '../../core/lib/clamav/client/errors/ClamAVClientError';
 import { ClamAVCommandFactoryError } from '../../core/lib/clamav/command/factory/errors/ClamAVCommandFactoryError';
-import { CoreLogger } from '../../core/logger/CoreLogger';
 import { RequestValidationError } from '../../core/base-errors/RequestValidationError';
+import { CoreLogger } from '../../core/logger';
 
 @Catch()
 export class ErrorHandlerInterceptor implements ExceptionFilter {

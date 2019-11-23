@@ -17,7 +17,8 @@
     "jsonwebtoken": "8.5.1",
     "reflect-metadata": "0.1.12",
     "rxjs": "6.5.3",
-    "signale": "1.4.0"
+    "signale": "1.4.0",
+    "winston": "3.2.1"
   },
   "devDependencies": {
     "@types/busboy": "0.2.3",

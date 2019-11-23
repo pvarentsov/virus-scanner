@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ServerResponse } from '../response';
 import { Request } from 'express';
 import { tap } from 'rxjs/operators';
-import { CoreLogger } from '../../core/logger/CoreLogger';
+import { CoreLogger } from '../../core/logger';
 
 @Injectable()
 export class LoggerInterceptor implements NestInterceptor {
