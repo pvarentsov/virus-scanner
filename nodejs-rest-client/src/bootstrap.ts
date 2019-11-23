@@ -6,12 +6,11 @@ import { CoreLogger } from './core/logger';
 
 (async (): Promise<void> => {
     if (!Config.API_CLUSTER_ENABLE) {
-        const serverApplication: ServerApplication = ServerApplication.create();
-        await serverApplication.bootstrap();
+        await runApplication();
 
     } else {
-        await spawnWorkers();
-        await runApplicationOnWorkers();
+        await spawnApplicationWorkers();
+        await runApplicationWorkers();
     }
 })();
 
@@ -20,7 +19,7 @@ async function runApplication(): Promise<void> {
     await serverApplication.bootstrap();
 }
 
-async function spawnWorkers(): Promise<void> {
+async function spawnApplicationWorkers(): Promise<void> {
     if (isMaster) {
         const cpuCount: number = cpus().length;
 
@@ -43,7 +42,7 @@ async function spawnWorkers(): Promise<void> {
     }
 }
 
-async function runApplicationOnWorkers(): Promise<void> {
+async function runApplicationWorkers(): Promise<void> {
     if (!isMaster) {
         await runApplication();
     }
