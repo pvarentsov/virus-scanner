@@ -1,6 +1,6 @@
 import { createLogger, format, Logger, LoggerOptions, transports } from 'winston';
 import { ILoggerTransport } from '../ILoggerTransport';
-import { Config } from '../../../configuration';
+import { Config } from '../../../../configuration';
 
 export class WinstonLoggerTransport implements ILoggerTransport {
 

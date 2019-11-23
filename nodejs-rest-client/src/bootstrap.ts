@@ -1,8 +1,8 @@
 import { ServerApplication } from './infrastructure/server/ServerApplication';
 import { Config } from './core/configuration';
+import { CoreLogger } from './core/lib/logger';
 import { fork, isMaster, on, Worker } from 'cluster';
 import { cpus } from 'os';
-import { CoreLogger } from './core/logger';
 
 (async (): Promise<void> => {
     if (!Config.API_CLUSTER_ENABLE) {

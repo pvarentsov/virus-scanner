@@ -1,5 +1,5 @@
 import { Signale, SignaleOptions } from 'signale';
-import { Config } from '../../../configuration';
+import { Config } from '../../../../configuration';
 import { ILoggerTransport } from '../ILoggerTransport';
 
 export class SignaleLoggerTransport implements ILoggerTransport {
