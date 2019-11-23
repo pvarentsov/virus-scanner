@@ -4,6 +4,13 @@
   "description": "Rest client for virus scanner",
   "author": "Pavel Varentsov",
   "license": "MIT",
+  "scripts": {
+    "install:all": "./scripts/yarn-install.sh",
+    "build": "./scripts/compiler.sh",
+    "start": "node ./dist/bootstrap.js",
+    "start:load-env": "cd ./dist && node -r dotenv/config . dotenv_config_path=.env bootstrap.js",
+    "lint": "./node_modules/.bin/tslint --project tsconfig.json --config tslint.json"
+  },
   "devDependencies": {
     "@nestjs/common": "6.8.5",
     "@nestjs/core": "6.8.5",
@@ -14,8 +21,8 @@
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3",
     "ts-node": "8.4.1",
-    "tslint": "5.20.0",
-    "typescript": "3.6.4"
+    "tslint": "5.20.1",
+    "typescript": "3.7.2"
   },
   "dependencies": {
     "ts-jest": "24.1.0"
