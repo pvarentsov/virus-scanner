@@ -1,4 +1,9 @@
 ### Intellij ###
 
-# User-specific stuff
 .idea/*
+
+### NodeJS Rest Client ###
+
+nodejs-rest-client/dist/
+nodejs-rest-client/node_modules/
+nodejs-rest-client/src/node_modules/
