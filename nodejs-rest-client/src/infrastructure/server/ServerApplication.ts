@@ -2,7 +2,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { NestFactory } from '@nestjs/core';
 import { RootModule } from '../module/RootModule';
 import { Config } from '../../core/configuration';
-import { CoreLogger } from '../../core/logger';
+import { CoreLogger } from '../../core/lib/logger';
 
 export class ServerApplication {
 

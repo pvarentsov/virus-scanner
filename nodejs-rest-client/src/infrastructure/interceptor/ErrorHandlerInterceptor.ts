@@ -5,7 +5,7 @@ import { ServiceInputParametersValidationDetails, ServiceInputParametersValidati
 import { ClamAVClientError } from '../../core/lib/clamav/client/errors/ClamAVClientError';
 import { ClamAVCommandFactoryError } from '../../core/lib/clamav/command/factory/errors/ClamAVCommandFactoryError';
 import { RequestValidationError } from '../../core/base-errors/RequestValidationError';
-import { CoreLogger } from '../../core/logger';
+import { CoreLogger } from '../../core/lib/logger';
 
 @Catch()
 export class ErrorHandlerInterceptor implements ExceptionFilter {
