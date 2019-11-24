@@ -22,7 +22,7 @@ print_help() {
 }
 
 build_image() {
-    docker build -f ./docker/Dockerfile.build . -t docker-api-builder > /dev/null
+    docker build -f ./Dockerfile.build . -t docker-api-builder > /dev/null
 }
 
 run_command() {

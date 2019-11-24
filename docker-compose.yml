@@ -16,6 +16,20 @@ services:
         aliases:
           - scanner
 
+  api:
+    restart: always
+    build:
+      context: nodejs-rest-client/
+      dockerfile: Dockerfile
+    ports:
+      - 1337:1337
+    expose:
+      - 1337
+    networks:
+      network:
+        aliases:
+          - scanner
+
 networks:
 
   network:
