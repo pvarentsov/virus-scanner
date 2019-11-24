@@ -9,12 +9,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3310:3310
-    expose:
-      - 3310
     networks:
       network:
         aliases:
-          - scanner
+          - scanner-network
 
   api:
     restart: always
@@ -25,10 +23,12 @@ services:
       - 1337:1337
     expose:
       - 1337
+    env_file:
+      - env/local/api.env
     networks:
       network:
         aliases:
-          - scanner
+          - scanner-network
 
 networks:
 
