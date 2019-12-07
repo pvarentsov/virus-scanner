@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3310:3310
+    expose:
+      - 3310
     networks:
       network:
         aliases:
@@ -19,12 +21,14 @@ services:
     build:
       context: nodejs-rest-client/
       dockerfile: Dockerfile
+    depends_on:
+      - scanner
     ports:
       - 1337:1337
     expose:
       - 1337
     env_file:
-      - env/local/api.env
+      - env/api.env
     networks:
       network:
         aliases:
