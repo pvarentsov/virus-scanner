@@ -18,7 +18,7 @@ To ran microservice you can use `docker compose`. It will ran Scanner service on
 
 Usage: `docker-compose up -d --build`.
 
-## Locally Development
+## Local Development
 
 To develop on local you can ran ClamAV container in the background: `docker-compose up --build scanner`.
 
