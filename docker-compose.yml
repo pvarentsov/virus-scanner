@@ -12,9 +12,9 @@ services:
     expose:
       - 3310
     networks:
-      network:
+      virus-scanner-network:
         aliases:
-          - scanner-network
+          - virus-scanner-network
 
   api:
     restart: always
@@ -30,14 +30,11 @@ services:
     env_file:
       - env/api.env
     networks:
-      network:
+      virus-scanner-network:
         aliases:
-          - scanner-network
+          - virus-scanner-network
 
 networks:
 
-  network:
+  virus-scanner-network:
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.enable_ip_masquerade: "true"
-      com.docker.network.bridge.enable_icc: "true"
