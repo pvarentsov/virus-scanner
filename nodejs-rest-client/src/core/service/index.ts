@@ -8,5 +8,9 @@ export { ServiceInputParametersValidationError } from './errors/ServiceInputPara
 
 // IO Parameters
 
-export { ServiceInputParametersValidationDetails, ServiceInputParameters } from './io-parameters/input/ServiceInputParameters';
-export { ServiceOutputParameters } from './io-parameters/output/ServiceOutputParameters';
+export {
+    ServiceInputParametersValidationDetails,
+    ServiceInputParameters
+} from './io-parameters/ServiceInputParameters';
+
+export { ServiceOutputParameters } from './io-parameters/ServiceOutputParameters';

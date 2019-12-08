@@ -14,19 +14,19 @@ REST Client is a NodeJS application based on `NestJS` framework.
 
 ## How-To
 
-To ran microservice you can use `docker compose`. It will ran Scanner service on port 3310 and API service on port 1337. 
+To run microservice you can use `docker compose`. It will run Scanner service on port 3310 and API service on port 1337. 
 
 Usage: `docker-compose up -d --build`.
 
 ## Local Development
 
-To develop on local you can ran ClamAV container in the background: `docker-compose up --build scanner`.
+To develop on local you can run ClamAV container in the background: `docker-compose up --build scanner`.
 
-To ran REST Client manually need to:
+To run REST Client manually need to:
 * install dependencies - `yarn install:all`
 * build project - `yarn build`
-* ran project - `yarn start`
+* run project - `yarn start`
 
 The REST Client configuring is based on environment variables. 
 
-You can ran client with variables from [dotenv file](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.
+You can run client with variables from [dotenv file](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.

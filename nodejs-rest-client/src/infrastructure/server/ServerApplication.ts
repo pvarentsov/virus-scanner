@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { RootModule } from '../module/RootModule';
 import { Config } from '../../core/configuration';
 import { CoreLogger } from '../../core/lib/logger';
+import { DocumentBuilder, SwaggerBaseConfig, SwaggerDocument, SwaggerModule } from '@nestjs/swagger';
 
 export class ServerApplication {
 
@@ -20,9 +21,28 @@ export class ServerApplication {
             { logger: Config.API_CLUSTER_ENABLE ? false : new CoreLogger() }
         );
 
-        await app.listen(this.port, this.host);
-
+        this.buildAPIDocumentation(app);
         this.log();
+
+        await app.listen(this.port, this.host);
+    }
+
+    public buildAPIDocumentation(app: NestExpressApplication): void {
+        const apiHost: string = Config.API_DOCUMENTATION_HOST;
+        const apiBasePath: string = Config.API_BASE_PATH;
+
+        const title: string = 'Virus Scanner';
+        const description: string = 'Virus Scanner API description';
+
+        const options: SwaggerBaseConfig = new DocumentBuilder()
+            .setTitle(title)
+            .setDescription(description)
+            .setHost(apiHost)
+            .build();
+
+        const document: SwaggerDocument = SwaggerModule.createDocument(app, options);
+
+        SwaggerModule.setup(`${apiBasePath}/documentation`, app, document);
     }
 
     public log(): void {

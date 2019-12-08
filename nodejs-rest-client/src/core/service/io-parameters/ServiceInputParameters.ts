@@ -1,5 +1,5 @@
 import { validate, ValidationError } from 'class-validator';
-import { ServiceInputParametersValidationError } from '../..';
+import { ServiceInputParametersValidationError } from '..';
 
 export class ServiceInputParameters {
 

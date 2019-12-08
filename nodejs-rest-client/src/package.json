@@ -18,6 +18,7 @@
     "reflect-metadata": "0.1.12",
     "rxjs": "6.5.3",
     "signale": "1.4.0",
+    "swagger-ui-express": "4.1.2",
     "winston": "3.2.1"
   },
   "devDependencies": {

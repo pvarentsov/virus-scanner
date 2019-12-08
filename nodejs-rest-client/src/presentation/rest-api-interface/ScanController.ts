@@ -12,9 +12,14 @@ import { Readable } from 'stream';
 import { ScanTokens } from '../../infrastructure/module/scanner/ScanTokens';
 import { ServerResponse } from '../../infrastructure/response';
 import { RequestValidationError } from '../../core/base-errors/RequestValidationError';
+import { Config } from '../../core/configuration';
+import { ApiConsumes, ApiImplicitFile, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { SyncScanResponse } from './documentation/scanner/sync-scan/SyncScanResponse';
+import { PingResponse } from './documentation/scanner/ping/PingResponse';
+import { GetVersionResponse } from './documentation/scanner/get-version/GetVersionResponse';
 import IBusboy = busboy.Busboy;
 
-@Controller('scanner')
+@Controller(`${Config.API_BASE_PATH}/scanner`)
 export class ScanController {
 
     constructor(
@@ -29,6 +34,10 @@ export class ScanController {
     ) {}
 
     @Post('sync-scan')
+    @ApiUseTags('Scanner')
+    @ApiConsumes('multipart/form-data')
+    @ApiImplicitFile({ name: 'file', required: true })
+    @ApiResponse({status: 200, type: SyncScanResponse})
     public async syncScan(@Req() request: Request): Promise<ServerResponse> {
         return new Promise(
             (resolve: ResolveCallback<ServerResponse>, reject: RejectCallback): void => {
@@ -66,12 +75,14 @@ export class ScanController {
     }
 
     @Post('ping')
+    @ApiResponse({status: 200, type: PingResponse})
     public async ping(): Promise<ServerResponse> {
         const pingDetails: PingScannerOutputParameters = await this.pingScannerService.execute();
         return ServerResponse.createSuccessResponse(pingDetails);
     }
 
     @Get('version')
+    @ApiResponse({status: 200, type: GetVersionResponse})
     public async getVersion(): Promise<ServerResponse> {
         const versionDetails: GetScannerVersionOutputParameters = await this.getScannerVersionService.execute();
         return ServerResponse.createSuccessResponse(versionDetails);

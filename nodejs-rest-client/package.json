@@ -21,11 +21,9 @@
     "@types/node": "12.11.7",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3",
+    "ts-jest": "24.1.0",
     "ts-node": "8.4.1",
     "tslint": "5.20.1",
     "typescript": "3.7.2"
-  },
-  "dependencies": {
-    "ts-jest": "24.1.0"
   }
 }
