@@ -23,7 +23,8 @@ Usage: `docker-compose up -d --build`.
 To develop on local you can run ClamAV container in the background: `docker-compose up --build scanner`.
 
 To run REST Client manually need to:
-* enter to directory - `cd ./nodejs-rest-client`
+* have NodeJS on your machine with version `> 11`
+* enter to the client directory - `cd ./nodejs-rest-client`
 * install dependencies - `yarn install:all`
 * build project - `yarn build`
 * run project - `yarn start`

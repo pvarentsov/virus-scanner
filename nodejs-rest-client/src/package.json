@@ -5,6 +5,10 @@
   "main": "bootstrap.js",
   "author": "Pavel Varentsov",
   "license": "MIT",
+  "engines": {
+    "node" : ">=11"
+  },
+  "engineStrict": true,
   "dependencies": {
     "@nestjs/common": "6.8.5",
     "@nestjs/core": "6.8.5",
