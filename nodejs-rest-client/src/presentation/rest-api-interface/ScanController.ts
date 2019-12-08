@@ -20,6 +20,7 @@ import { GetVersionResponse } from './documentation/scanner/get-version/GetVersi
 import IBusboy = busboy.Busboy;
 
 @Controller(`${Config.API_BASE_PATH}/scanner`)
+@ApiUseTags('Scanner')
 export class ScanController {
 
     constructor(
@@ -34,7 +35,6 @@ export class ScanController {
     ) {}
 
     @Post('sync-scan')
-    @ApiUseTags('Scanner')
     @ApiConsumes('multipart/form-data')
     @ApiImplicitFile({ name: 'file', required: true })
     @ApiResponse({status: 200, type: SyncScanResponse})
