@@ -10,7 +10,7 @@ ClamAV is used as a docker image. It runs:
 
 ## REST Client
 
-REST Client is a NodeJS application based on `NestJS` framework. 
+REST Client is a NodeJS application based on [NestJS](https://nestjs.com/) framework. 
 
 ## How-To
 
