@@ -42,3 +42,9 @@ You can run client with variables from [dotenv file](nodejs-rest-client/env/.env
 ## Notes
 
 The running of the `clamd` daemon can take a little time. So it can be unavailable the first 20-40 seconds after starting. 
+
+## TODO
+
+1. Endpoint to scan file asynchronously (use notification URL)
+2. Configuring of file size limits
+3. Unit and e2e tests
