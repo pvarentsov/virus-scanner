@@ -35,8 +35,6 @@ To run REST Client manually on your machine need to:
 * build project - `yarn build`
 * run project - `yarn start`
 
-The REST Client configuring is based on environment variables. 
-
 You can run client with variables from [dotenv file](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.
 
 ## Notes
