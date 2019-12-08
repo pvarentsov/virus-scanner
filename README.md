@@ -4,7 +4,7 @@ This project is a virus scanner as a microservice with REST interface. It consis
 
 ## ClamAV
 
-ClamAV is used as a docker image. It runs:
+[ClamAV](https://www.clamav.net/) is used as a docker image. It runs:
 * `clamd` daemon socket listening on port 3310;
 * `freshclam` signature database update tool in the background.
 
