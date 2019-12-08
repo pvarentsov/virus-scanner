@@ -12,6 +12,10 @@
     "start:env": "yarn copy:env && cd ./dist && node -r dotenv/config . dotenv_config_path=.env bootstrap.js",
     "lint": "./node_modules/.bin/tslint --project tsconfig.json --config tslint.json"
   },
+  "engines": {
+    "node" : ">=11"
+  },
+  "engineStrict": true,
   "devDependencies": {
     "@nestjs/common": "6.8.5",
     "@nestjs/core": "6.8.5",
