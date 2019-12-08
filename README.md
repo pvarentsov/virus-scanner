@@ -18,6 +18,12 @@ To run microservice you can use `docker compose`. It will run Scanner service on
 
 Usage: `docker-compose up -d --build`.
 
+## Configuring
+
+REST Client configuring is based on environment variables. See all variables [here](nodejs-rest-client/env/.env). In current implementation all variables must be exported before starting the REST Client.
+
+ClamAV uses [clamd.conf](scanner/clamav/docker/clamd.conf) and [freshclam.conf](scanner/clamav/docker/freshclam.conf) configurations files. You can change these before building docker image. See the full documentation of the [clamd.conf](https://linux.die.net/man/5/clamd.conf) and [freshclam.conf](https://linux.die.net/man/5/freshclam.conf).
+
 ## Local Development
 
 To develop on local you can run ClamAV container in the background: `docker-compose up --build scanner`.
@@ -32,3 +38,7 @@ To run REST Client manually need to:
 The REST Client configuring is based on environment variables. 
 
 You can run client with variables from [dotenv file](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.
+
+## Notes
+
+The running of the `clamd` daemon can take a little time. So it can be unavailable the first 20-40 seconds after starting. 
