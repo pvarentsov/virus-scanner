@@ -12,14 +12,29 @@ services:
     expose:
       - 3310
     networks:
-      network:
+      virus-scanner-network:
         aliases:
-          - scanner
+          - virus-scanner-network
+
+  api:
+    restart: always
+    build:
+      context: nodejs-rest-client/
+      dockerfile: Dockerfile
+    depends_on:
+      - scanner
+    ports:
+      - 1337:1337
+    expose:
+      - 1337
+    env_file:
+      - env/api.env
+    networks:
+      virus-scanner-network:
+        aliases:
+          - virus-scanner-network
 
 networks:
 
-  network:
+  virus-scanner-network:
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.enable_ip_masquerade: "true"
-      com.docker.network.bridge.enable_icc: "true"
