@@ -31,7 +31,7 @@ export class ErrorHandlerInterceptor implements ExceptionFilter {
     private handleRequestValidationError(error: Error, errorResponse: ServerResponse): ServerResponse {
         if (error instanceof RequestValidationError) {
             const code: number = ServerResponseCode.REQUEST_VALIDATION_ERROR.code;
-            const message: string = error.getMessage() || ServerResponseCode.REQUEST_VALIDATION_ERROR.message;
+            const message: string = error.message || ServerResponseCode.REQUEST_VALIDATION_ERROR.message;
 
             errorResponse = ServerResponse.createErrorResponse(code, message);
         }

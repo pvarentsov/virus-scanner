@@ -3,9 +3,13 @@ import { ClamAVScanStatus } from '../types/ClamAVScanStatus';
 
 export class ClamAVClientResponseParser {
 
+    /**
+     *  Available message values:
+     *  * stream: OK
+     *  * stream: Some-Signature FOUND
+     */
     public static parseScanDetails(message: string): ClamAVScanDetails {
-        const parsedMessage: string = message
-            .replace('\u0000', '')
+        const parsedMessage: string = ClamAVClientResponseParser.clearNoise(message)
             .replace('stream: ', '')
             .replace('FOUND', 'found')
             .replace('OK', 'Ok');
@@ -17,11 +21,22 @@ export class ClamAVClientResponseParser {
         return { Message: parsedMessage, Status: status };
     }
 
+    /**
+     *  Available values:
+     *  * PONG\n
+     */
     public static parsePingDetails(message: string): ClamAVPingDetails {
-        const parsedMessage: string = message.replace('\n', '');
+        const parsedMessage: string = ClamAVClientResponseParser
+            .clearNoise(message)
+            .replace('\n', '');
+
         return { Message: parsedMessage };
     }
 
+    /**
+     *  Available values:
+     *  * ClamAV 0.102.0/25000/Wed Jan 01 00:00:00 2019\n
+     */
     public static parseVersionDetails(message: string): ClamAVVersionDetails {
         let clamAVVersion: string = '';
         let signatureDatabaseVersion: string = '';
@@ -29,8 +44,10 @@ export class ClamAVClientResponseParser {
 
         // Parsing of the ClamAV version
 
+        const cleanMessage: string = ClamAVClientResponseParser.clearNoise(message);
+
         const clamAVVersionRegexp: RegExp = new RegExp(`ClamAV ([0-9.]*)\\/`, 'g');
-        const matchesWithClamAVVersion: string[] | null = message.match(clamAVVersionRegexp);
+        const matchesWithClamAVVersion: string[] | null = cleanMessage.match(clamAVVersionRegexp);
 
         if (matchesWithClamAVVersion && matchesWithClamAVVersion.length > 0) {
             clamAVVersion = matchesWithClamAVVersion[0]
@@ -41,7 +58,7 @@ export class ClamAVClientResponseParser {
         // Parsing of the Signature Database version
 
         const signatureDatabaseVersionRegexp: RegExp = new RegExp(`ClamAV ${clamAVVersion}\\/[0-9]+\\/`, 'g');
-        const matchesWithSignatureDatabaseVersion: string[] | null = message.match(signatureDatabaseVersionRegexp);
+        const matchesWithSignatureDatabaseVersion: string[] | null = cleanMessage.match(signatureDatabaseVersionRegexp);
 
         if (matchesWithSignatureDatabaseVersion && matchesWithSignatureDatabaseVersion.length > 0) {
             signatureDatabaseVersion = matchesWithSignatureDatabaseVersion[0]
@@ -52,7 +69,7 @@ export class ClamAVClientResponseParser {
         // Parsing of the Signature Database Build Time
 
         if (clamAVVersion && signatureDatabaseVersion) {
-            signatureDatabaseBuildTime = message
+            signatureDatabaseBuildTime = cleanMessage
                 .replace(`ClamAV ${clamAVVersion}/${signatureDatabaseVersion}/`, '')
                 .replace('\n', '');    
         }
@@ -63,6 +80,12 @@ export class ClamAVClientResponseParser {
         };
 
         return versionDetails;
+    }
+
+    public static clearNoise(message: string): string {
+        return message
+            .replace(new RegExp('\\u0000', 'g'), '');
+
     }
 
 }
