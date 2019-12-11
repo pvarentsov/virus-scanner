@@ -15,8 +15,12 @@ export class RequestValidationError extends Error {
         return new RequestValidationError(message);
     }
 
-    public getMessage(): string {
-        return this.message;
+    public static SIZE_LIMIT_EXCEEDED_MESSAGE = (limit: number): string => {
+        return `File size exceeded. Limit is ${limit} bytes.`;
+    }
+
+    public static MULTIPART_FORM_EMPTY_MESSAGE = (): string => {
+        return `Multipart form is empty.`;
     }
 
 }

@@ -69,7 +69,13 @@ export class ClamAVClient {
         return new Promise((resolve: (value: string) => void, reject: (error: Error) => void): void => {
 
             const connectTimer: NodeJS.Timeout = setTimeout(
-                () => socket.destroy(ClamAVClientError.createConnectionTimedOutError()),
+                () => {
+                    socket.destroy(ClamAVClientError.createConnectionTimedOutError());
+
+                    if (this.inputData) {
+                        this.inputData.stream.destroy();
+                    }
+                },
                 this.timeoutInMs
             );
 
@@ -109,7 +115,11 @@ export class ClamAVClient {
 
                 if (inputData && !inputData.isFinished) {
                     inputData.stream.destroy();
-                    reject(ClamAVClientError.createScanAbortedError(commandResultBuffer.toString('utf-8')));
+
+                    const commandResult: string = commandResultBuffer.toString('utf-8');
+                    const cleanCommandResult: string = ClamAVClientResponseParser.clearNoise(commandResult);
+
+                    reject(ClamAVClientError.createScanAbortedError(cleanCommandResult));
                 }
 
                 resolve(commandResultBuffer.toString('utf-8'));

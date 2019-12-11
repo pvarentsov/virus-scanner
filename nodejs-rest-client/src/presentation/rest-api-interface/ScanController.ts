@@ -97,7 +97,8 @@ export class ScanController {
 
         busboy.on('finish', (): void => {
             if (fieldNames.length === 0) {
-                reject(RequestValidationError.create(`Multipart form is empty.`));
+                const errorMessage: string = RequestValidationError.MULTIPART_FORM_EMPTY_MESSAGE();
+                reject(RequestValidationError.create(errorMessage));
             }
         });
     }
