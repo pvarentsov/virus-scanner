@@ -10,22 +10,17 @@ export class LoggerInterceptor implements NestInterceptor {
 
     public intercept(context: ExecutionContext, next: CallHandler): Observable<ServerResponse> {
         const request: Request = context.switchToHttp().getRequest();
-
         const requestStartDate: number = Date.now();
 
-        return next
-            .handle()
-            .pipe(
-                tap(() => {
-                    const requestFinishDate: number = Date.now();
+        return next.handle().pipe(tap(() => {
+            const requestFinishDate: number = Date.now();
 
-                    const message: string =
-                        `Method: ${request.method}; ` +
-                        `Path: ${request.path}; ` +
-                        `SpentTime: ${requestFinishDate - requestStartDate}ms`;
+            const message: string =
+                `Method: ${request.method}; ` +
+                `Path: ${request.path}; ` +
+                `SpentTime: ${requestFinishDate - requestStartDate}ms`;
 
-                    CoreLogger.log(message, LoggerInterceptor.name);
-                })
-            );
+            CoreLogger.log(message, LoggerInterceptor.name);
+        }));
     }
 }
