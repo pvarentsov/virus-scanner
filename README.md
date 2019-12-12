@@ -44,5 +44,4 @@ The running of the `clamd` daemon can take a little time. So it can be unavailab
 ## TODO
 
 1. Endpoint to scan a files asynchronously (use notification URL)
-2. Configuring of the file size limits
-3. Unit and e2e tests
+2. Unit and e2e tests

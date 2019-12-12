@@ -15,7 +15,7 @@ export class RequestValidationError extends Error {
         return new RequestValidationError(message);
     }
 
-    public static SIZE_LIMIT_EXCEEDED_MESSAGE = (limit: number): string => {
+    public static FILE_SIZE_EXCEEDED_MESSAGE = (limit: number): string => {
         return `File size exceeded. Limit is ${limit} bytes.`;
     }
 
