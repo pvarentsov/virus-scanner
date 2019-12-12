@@ -12,7 +12,7 @@ export class SyncScanService implements IService<SyncScanInputParameters, SyncSc
         const fileSizeLimit: number = Config.MAX_SYNC_SCAN_FILE_SIZE;
 
         if (inputParameters.fileSizeInBytes > fileSizeLimit) {
-            const errorMessage: string = RequestValidationError.SIZE_LIMIT_EXCEEDED_MESSAGE(fileSizeLimit);
+            const errorMessage: string = RequestValidationError.FILE_SIZE_EXCEEDED_MESSAGE(fileSizeLimit);
             throw RequestValidationError.create(errorMessage);
         }
 
