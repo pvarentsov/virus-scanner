@@ -1,0 +1,16 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "testEnvironment": "node",
+  "testRegex": ".(spec).ts$",
+  "coverageDirectory": "./unit-coverage",
+  "collectCoverageFrom": [
+    "./src/**/*.{ts,js}"
+  ],
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "setupFiles": [
+    "./test/jest-unit-setup-env.ts"
+  ]
+}
