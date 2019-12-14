@@ -17,17 +17,17 @@
   },
   "engineStrict": true,
   "devDependencies": {
-    "@nestjs/common": "6.8.5",
-    "@nestjs/core": "6.8.5",
-    "@nestjs/testing": "6.8.5",
-    "@types/express": "4.17.1",
-    "@types/jest": "24.0.20",
-    "@types/node": "12.11.7",
+    "@nestjs/common": "6.10.11",
+    "@nestjs/core": "6.10.11",
+    "@nestjs/testing": "6.10.11",
+    "@types/express": "4.17.2",
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.17",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3",
-    "ts-jest": "24.1.0",
-    "ts-node": "8.4.1",
+    "ts-jest": "24.2.0",
+    "ts-node": "8.5.4",
     "tslint": "5.20.1",
-    "typescript": "3.7.2"
+    "typescript": "3.7.3"
   }
 }
