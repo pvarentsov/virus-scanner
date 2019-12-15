@@ -31,7 +31,7 @@ To develop locally you can run ClamAV container in the background: `docker-compo
 To run REST Client manually on your machine need to:
 * have NodeJS with version `> 11` and `yarn` installed globally
 * enter to the client directory - `cd ./nodejs-rest-client`
-* install dependencies - `yarn install:all`
+* install dependencies - `yarn install`
 * build project - `yarn build`
 * run project - `yarn start`
 
