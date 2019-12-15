@@ -1,9 +1,11 @@
-import { ClamaAVCommandType } from '../../../../../../../../src/core/lib/clamav/command/types/ClamaAVCommandType';
-import { ClamAVCommandFactory } from '../../../../../../../../src/core/lib/clamav/command/factory/ClamAVCommandFactory';
-import { ClamAVCommand } from '../../../../../../../../src/core/lib/clamav/command/types/ClamAVCommand';
+import { ClamaAVCommandType } from '../../../../../../../src/core/lib/clamav/command/types/ClamaAVCommandType';
+import { ClamAVCommandFactory } from '../../../../../../../src/core/lib/clamav/command/factory/ClamAVCommandFactory';
+import { ClamAVCommand } from '../../../../../../../src/core/lib/clamav/command/types/ClamAVCommand';
 import { Readable } from 'stream';
-import { ClamAVCommandFactoryError } from '../../../../../../../../src/core/lib/clamav/command/factory/errors/ClamAVCommandFactoryError';
-import { TestHelper } from '../../../../../../../helper';
+import {
+    ClamAVCommandFactoryError
+} from '../../../../../../../src/core/lib/clamav/command/factory/errors/ClamAVCommandFactoryError';
+import { TestHelper } from '../../../../../../helper';
 
 describe('ClamAVCommandFactory', () => {
 
