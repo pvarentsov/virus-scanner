@@ -1,10 +1,10 @@
 import { BaseResponseModel } from '../../common/BaseResponseModel';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { SyncScanResponseDataModel } from './SyncScanResponseDataModel';
 
 export class SyncScanResponse extends BaseResponseModel {
 
-    @ApiModelProperty({ type: SyncScanResponseDataModel })
+    @ApiProperty({ type: SyncScanResponseDataModel })
     public readonly data: SyncScanResponseDataModel;
 
 }

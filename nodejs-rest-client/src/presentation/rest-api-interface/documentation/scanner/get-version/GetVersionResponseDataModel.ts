@@ -1,12 +1,12 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { ClamAVScanStatus } from '../../../../../core/lib/clamav/client/types/ClamAVScanStatus';
 
 export class GetVersionResponseDataModel {
 
-    @ApiModelProperty({ type: 'string' })
+    @ApiProperty({ type: 'string' })
     public readonly message: string;
 
-    @ApiModelProperty({ enum: [ClamAVScanStatus.CLEAN, ClamAVScanStatus.INFECTED] })
+    @ApiProperty({ enum: [ClamAVScanStatus.CLEAN, ClamAVScanStatus.INFECTED] })
     public readonly status: ClamAVScanStatus;
 
 }

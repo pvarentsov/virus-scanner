@@ -16,10 +16,6 @@ describe('Config', () => {
             expect(typeof Config.API_BASE_PATH === 'string').toBeTruthy();
         });
 
-        it('When environment variables are exposed, expect API_DOCUMENTATION_HOST to be initialized as string', () => {
-            expect(typeof Config.API_DOCUMENTATION_HOST === 'string').toBeTruthy();
-        });
-
         it('When environment variables are exposed, expect API_CLUSTER_ENABLE to be initialized as number', () => {
             expect(typeof Config.API_CLUSTER_ENABLE === 'number').toBeTruthy();
         });
