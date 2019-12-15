@@ -1,15 +1,14 @@
 {
   "name": "nodejs-rest-client",
   "version": "0.0.1",
-  "description": "Rest client for virus scanner",
+  "description": "REST client for virus scanner",
   "author": "Pavel Varentsov",
   "license": "MIT",
   "scripts": {
-    "install:all": "./scripts/yarn-install.sh",
     "build": "./scripts/compiler.sh",
     "copy:env": "cp ./env/.env ./dist/",
     "start": "node ./dist/bootstrap.js",
-    "start:env": "yarn copy:env && cd ./dist && node -r dotenv/config . dotenv_config_path=.env bootstrap.js",
+    "start:env": "yarn copy:env && cd ./dist && node -r dotenv/config bootstrap.js",
     "lint": "./node_modules/.bin/tslint --project tsconfig.json --config tslint.json",
     "test:unit": "./node_modules/.bin/jest --config jest-unit.json",
     "test:unit:coverage": "./node_modules/.bin/jest --coverage --config jest-unit.json"
@@ -18,17 +17,28 @@
     "node": ">=11"
   },
   "engineStrict": true,
-  "devDependencies": {
+  "dependencies": {
     "@nestjs/common": "6.10.11",
     "@nestjs/core": "6.10.11",
+    "@nestjs/platform-express": "6.10.11",
+    "@nestjs/swagger": "3.1.0",
+    "busboy": "0.3.1",
+    "class-validator": "0.11.0",
+    "dotenv": "8.2.0",
+    "reflect-metadata": "0.1.13",
+    "rxjs": "6.5.3",
+    "signale": "1.4.0",
+    "swagger-ui-express": "4.1.2",
+    "winston": "3.2.1"
+  },
+  "devDependencies": {
     "@nestjs/testing": "6.10.11",
     "@types/express": "4.17.2",
     "@types/jest": "24.0.23",
     "@types/node": "12.12.17",
-    "dotenv": "8.2.0",
+    "@types/busboy": "0.2.3",
+    "@types/signale": "1.2.1",
     "jest": "24.9.0",
-    "reflect-metadata": "0.1.13",
-    "rxjs": "6.5.3",
     "ts-jest": "24.2.0",
     "ts-node": "8.5.4",
     "tslint": "5.20.1",
