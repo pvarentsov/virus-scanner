@@ -5,7 +5,7 @@ import { Readable } from 'stream';
 import {
     ClamAVCommandFactoryError
 } from '../../../../../../../src/core/lib/clamav/command/factory/errors/ClamAVCommandFactoryError';
-import { TestHelper } from '../../../../../../helper';
+import { TestHelper } from '../../../../../../.helper';
 
 describe('ClamAVCommandFactory', () => {
 
