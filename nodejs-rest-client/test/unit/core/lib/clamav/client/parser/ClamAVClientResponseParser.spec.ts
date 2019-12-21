@@ -7,7 +7,6 @@ describe('ClamAVClientResponseParser', () => {
     describe(`Parse scan details`, () => {
 
         const cleanMsg: string = 'stream: OK';
-        const infectedMsg: string = 'stream: Some-Signature FOUND';
 
         it(`When details contain "${cleanMsg}", expect ClamAVScanDetails object with clean status`, () => {
             const expectedScanDetails: ClamAVScanDetails = {
@@ -19,6 +18,8 @@ describe('ClamAVClientResponseParser', () => {
 
             expect(scanDetails).toEqual(expectedScanDetails);
         });
+
+        const infectedMsg: string = 'stream: Some-Signature FOUND';
 
         it(`When details contain "${infectedMsg}", expect ClamAVScanDetails object with infected status`, () => {
             const expectedScanDetails: ClamAVScanDetails = {

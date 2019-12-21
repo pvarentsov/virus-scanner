@@ -5,7 +5,7 @@ import { Readable } from 'stream';
 import {
     ClamAVCommandFactoryError
 } from '../../../../../../../src/core/lib/clamav/command/factory/errors/ClamAVCommandFactoryError';
-import { TestHelper } from '../../../../../../.helper/TestHelper';
+import { MockBuilder } from '../../../../../../.helper/MockBuilder';
 
 describe('ClamAVCommandFactory', () => {
 
@@ -30,7 +30,7 @@ describe('ClamAVCommandFactory', () => {
                 needData   : false
             });
 
-            const mockReadStream: Readable = TestHelper.createMockReadStream();
+            const mockReadStream: Readable = MockBuilder.createMockReadStream();
             
             const createCommandFunction: () => void = (): void => {
                 ClamAVCommandFactory.createCommand(ClamaAVCommandType.PING, mockReadStream);
@@ -62,7 +62,7 @@ describe('ClamAVCommandFactory', () => {
                 needData   : false
             });
 
-            const mockReadStream: Readable = TestHelper.createMockReadStream();
+            const mockReadStream: Readable = MockBuilder.createMockReadStream();
 
             const createCommandFunction: () => void = (): void => {
                 ClamAVCommandFactory.createCommand(ClamaAVCommandType.VERSION, mockReadStream);
@@ -76,7 +76,7 @@ describe('ClamAVCommandFactory', () => {
     describe(`Create INSTREAM command`, () => {
 
         it('When commandType is INSTREAM and data is set, expect INSTREAM ClamAVCommand object', () => {
-            const mockReadStream: Readable = TestHelper.createMockReadStream();
+            const mockReadStream: Readable = MockBuilder.createMockReadStream();
 
             const command: ClamAVCommand = ClamAVCommandFactory.createCommand(
                 ClamaAVCommandType.INSTREAM,

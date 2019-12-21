@@ -32,8 +32,4 @@ export class ClamAVCommandFactoryError extends Error {
         return new ClamAVCommandFactoryError(message);
     }
 
-    public getMessage(): string {
-        return this.message;
-    }
-
 }
