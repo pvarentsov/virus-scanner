@@ -49,13 +49,13 @@ export class ErrorHandlerInterceptor implements ExceptionFilter {
     private handleClamAVError(error: Error, errorResponse: ServerResponse): ServerResponse {
         if (error instanceof ClamAVClientError) {
             const code: number = ServerResponseCode.INTERNAL_ERROR.code;
-            const message: string = error.getMessage();
+            const message: string = error.message;
 
             errorResponse = ServerResponse.createErrorResponse(code, message);
         }
         if (error instanceof ClamAVCommandFactoryError) {
             const code: number = ServerResponseCode.INTERNAL_ERROR.code;
-            const message: string = error.getMessage();
+            const message: string = error.message;
 
             errorResponse = ServerResponse.createErrorResponse(code, message);
         }

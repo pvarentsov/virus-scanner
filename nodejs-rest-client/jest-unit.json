@@ -1,0 +1,20 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "rootDir": ".",
+  "verbose": true,
+  "testEnvironment": "node",
+  "testRegex": ".(spec).ts$",
+  "coverageDirectory": "./unit-coverage",
+  "collectCoverageFrom": [
+    "./src/**/*.{ts,js}",
+    "!./dist",
+    "!./test",
+    "!./node_modules"
+  ],
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "setupFiles": [
+    "./test/.helper/SetupEnv.ts"
+  ]
+}

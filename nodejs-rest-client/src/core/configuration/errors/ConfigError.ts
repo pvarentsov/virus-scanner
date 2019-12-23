@@ -21,8 +21,4 @@ export class ConfigError extends Error {
         return new ConfigError(message);
     }
 
-    public getMessage(): string {
-        return this.message;
-    }
-
 }

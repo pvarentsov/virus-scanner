@@ -8,8 +8,6 @@ export class Config {
 
     public static readonly API_BASE_PATH: string = Config.parseStringVariable('API_BASE_PATH');
 
-    public static readonly API_DOCUMENTATION_HOST: string = Config.parseStringVariable('API_DOCUMENTATION_HOST');
-
     public static readonly API_CLUSTER_ENABLE: number = Config.parseNumberVariable('API_CLUSTER_ENABLE');
 
     public static readonly CLAMAV_HOST: string = Config.parseStringVariable('CLAMAV_HOST');

@@ -1,10 +1,10 @@
 import { BaseResponseModel } from '../../common/BaseResponseModel';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { GetVersionResponseDataModel } from './GetVersionResponseDataModel';
 
 export class GetVersionResponse extends BaseResponseModel {
 
-    @ApiModelProperty({ type: GetVersionResponseDataModel })
+    @ApiProperty({ type: GetVersionResponseDataModel })
     public readonly data: GetVersionResponseDataModel;
 
 }

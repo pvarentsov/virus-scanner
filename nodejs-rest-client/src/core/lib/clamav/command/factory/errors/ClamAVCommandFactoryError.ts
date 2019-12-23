@@ -18,10 +18,10 @@ export class ClamAVCommandFactoryError extends Error {
 
     ): ClamAVCommandFactoryError {
 
-        let message: string = `${options.commandType} command require the data.`;
+        let message: string = `${options.commandType} command requires the data.`;
 
         if (!options.needData) {
-            message = `${options.commandType} command don't require the data.`;
+            message = `${options.commandType} command does't require the data.`;
         }
 
         return new ClamAVCommandFactoryError(message);
@@ -30,10 +30,6 @@ export class ClamAVCommandFactoryError extends Error {
     public static createUnknownCommandError(unknownCommand: string): ClamAVCommandFactoryError {
         const message: string = `Unknown command: ${unknownCommand}.`;
         return new ClamAVCommandFactoryError(message);
-    }
-
-    public getMessage(): string {
-        return this.message;
     }
 
 }

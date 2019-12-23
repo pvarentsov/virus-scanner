@@ -1,17 +1,17 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class BaseResponseModel {
 
-    @ApiModelProperty({type: 'number'})
+    @ApiProperty({type: 'number'})
     public readonly code: number;
 
-    @ApiModelProperty({type: 'string'})
+    @ApiProperty({type: 'string'})
     public readonly message: string;
 
-    @ApiModelProperty({type: 'number', description: ' Timestamp in milliseconds'})
+    @ApiProperty({type: 'number', description: ' Timestamp in milliseconds'})
     public readonly timestamp: number;
 
-    @ApiModelProperty({type: null})
+    @ApiProperty({type: 'object'})
     public readonly data: {};
 
 }

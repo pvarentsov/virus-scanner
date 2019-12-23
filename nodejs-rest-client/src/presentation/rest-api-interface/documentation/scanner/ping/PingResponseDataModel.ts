@@ -1,8 +1,8 @@
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class PingResponseDataModel {
 
-    @ApiModelProperty({ type: 'string' })
+    @ApiProperty({ type: 'string' })
     public readonly message: string;
 
 }
