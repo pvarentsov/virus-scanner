@@ -1,7 +1,7 @@
 // Service
 
 export { SyncScanService } from './service/SyncScanService';
-export { PingScannerVersionService } from './service/PingScannerVersionService';
+export { PingScannerService } from './service/PingScannerService';
 export { GetScannerVersionService } from './service/GetScannerVersionService';
 
 // IO Parameters

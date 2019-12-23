@@ -5,7 +5,7 @@ import { PingScannerOutputParameters } from '..';
 import { Config } from '../../../core/configuration';
 
 @Injectable()
-export class PingScannerVersionService implements IService<void, PingScannerOutputParameters> {
+export class PingScannerService implements IService<void, PingScannerOutputParameters> {
 
     public async execute(): Promise<PingScannerOutputParameters> {
         const connectionOptions: ClamAVConnectionOptions = {

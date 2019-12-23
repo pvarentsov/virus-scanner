@@ -4,7 +4,7 @@ export enum ScanTokens {
 
     AsyncScanService          = 'AsyncScanService',
 
-    PingScannerVersionService = 'PingScannerVersionService',
+    PingScannerService        = 'PingScannerService',
 
     GetScannerVersionService  = 'GetScannerVersionService',
 

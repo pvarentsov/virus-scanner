@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ScanController } from '../../../presentation/rest-api-interface/ScanController';
-import { GetScannerVersionService, PingScannerVersionService, SyncScanService } from '../../../application/scanner';
+import { GetScannerVersionService, PingScannerService, SyncScanService } from '../../../application/scanner';
 import { ScanTokens } from './ScanTokens';
 
 @Module({
@@ -13,8 +13,8 @@ import { ScanTokens } from './ScanTokens';
             useClass: SyncScanService
         },
         {
-            provide : ScanTokens.PingScannerVersionService,
-            useClass: PingScannerVersionService
+            provide : ScanTokens.PingScannerService,
+            useClass: PingScannerService
         },
         {
             provide : ScanTokens.GetScannerVersionService,
