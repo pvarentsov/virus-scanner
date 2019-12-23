@@ -3,7 +3,7 @@ import { Readable } from 'stream';
 export class MockHelper {
 
     public static createMockReadStream(buffer?: Buffer): Readable {
-        const data: Buffer = buffer || Buffer.from('');
+        const data: Buffer = buffer || Buffer.from('11111111');
         const readStream: Readable = new Readable();
 
         readStream.push(data);
@@ -12,7 +12,7 @@ export class MockHelper {
         return readStream;
     }
 
-    public static createBuffer(options: { sizeInBytes: number, UIntData: number[],  }): Buffer {
+    public static createBuffer(options: { sizeInBytes: number, UIntData: number[] }): Buffer {
         if (options.sizeInBytes !== options.UIntData.length) {
             throw new Error('MockHelper: UIntData length does not match the sizeInBytes');
         }
