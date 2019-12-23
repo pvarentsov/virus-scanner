@@ -1,4 +1,6 @@
 import { Readable } from 'stream';
+import { Socket } from 'net';
+import Mitm = require('mitm');
 
 export class MockHelper {
 
@@ -25,5 +27,26 @@ export class MockHelper {
 
         return sourceBuffer;
     }
+
+    public static createClamAVServer(options: { sendOnConnection: string, delayInMs: number }): IMockClamAVServer {
+        const clamAVServer: IMockClamAVServer = Mitm();
+
+        clamAVServer.on('connection', (socket: Socket) => {
+            setTimeout(() => {
+                socket.write(options.sendOnConnection);
+                socket.emit('end');
+            }, options.delayInMs);
+        });
+
+        return clamAVServer;
+    }
+
+}
+
+export interface IMockClamAVServer {
+
+    on(event: 'connection', callback: (socket: Socket) => void): void;
+
+    disable(): void;
 
 }
