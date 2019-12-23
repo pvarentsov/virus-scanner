@@ -19,17 +19,7 @@ describe('ClamAVCommandDataTransformer', () => {
 
             const expectedBuffer: Buffer = MockHelper.createBuffer({
                 sizeInBytes: 9,
-                UIntData   : [
-                    0,
-                    0,
-                    0,
-                    1,
-                    255,
-                    0,
-                    0,
-                    0,
-                    0,
-                ]
+                UIntData   : [0, 0, 0, 1, 255, 0, 0, 0, 0]
             });
 
             const transformedReadStream: Readable = sourceReadStream.pipe(ClamAVCommandDataTransformer.INSTREAM());
