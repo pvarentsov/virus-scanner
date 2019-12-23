@@ -17,17 +17,13 @@ export class ClamAVClientError extends Error {
     }
 
     public static createScanAbortedError(reason: string): ClamAVClientError {
-        let message: string = `Scan aborted:`;
+        let message: string = `Scan aborted.`;
 
         if (reason.length > 0) {
             message = message + ` Reason: ${reason}.`;
         }
 
         return new ClamAVClientError(message);
-    }
-
-    public getMessage(): string {
-        return this.message;
     }
 
 }

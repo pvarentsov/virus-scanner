@@ -12,7 +12,8 @@ export class ClamAVClientResponseParser {
         const parsedMessage: string = ClamAVClientResponseParser.clearNoise(message)
             .replace('stream: ', '')
             .replace('FOUND', 'found')
-            .replace('OK', 'Ok');
+            .replace('OK', 'Ok')
+            .replace('\n', '');
 
         const status: ClamAVScanStatus = message.includes('OK') && !message.includes('FOUND')
             ? ClamAVScanStatus.CLEAN

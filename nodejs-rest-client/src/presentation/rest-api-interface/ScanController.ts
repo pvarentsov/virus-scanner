@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, Post, Req } from '@nestjs/common';
+import { Controller, Get, HttpCode, Inject, Post, Req } from '@nestjs/common';
 import { IService } from '../../core/service';
 import {
     GetScannerVersionOutputParameters,
@@ -13,14 +13,15 @@ import { ScanTokens } from '../../infrastructure/module/scanner/ScanTokens';
 import { ServerResponse } from '../../infrastructure/response';
 import { RequestValidationError } from '../../core/base-errors/RequestValidationError';
 import { Config } from '../../core/configuration';
-import { ApiConsumes, ApiImplicitFile, ApiResponse, ApiUseTags } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { SyncScanResponse } from './documentation/scanner/sync-scan/SyncScanResponse';
 import { PingResponse } from './documentation/scanner/ping/PingResponse';
 import { GetVersionResponse } from './documentation/scanner/get-version/GetVersionResponse';
+import { SyncScanBody } from './documentation/scanner/sync-scan/SyncScanBody';
 import IBusboy = busboy.Busboy;
 
 @Controller(`${Config.API_BASE_PATH}/scanner`)
-@ApiUseTags('Scanner')
+@ApiTags('Scanner')
 export class ScanController {
 
     constructor(
@@ -35,8 +36,9 @@ export class ScanController {
     ) {}
 
     @Post('sync-scan')
+    @HttpCode(200)
     @ApiConsumes('multipart/form-data')
-    @ApiImplicitFile({ name: 'file', required: true })
+    @ApiBody({type: SyncScanBody})
     @ApiResponse({status: 200, type: SyncScanResponse})
     public async syncScan(@Req() request: Request): Promise<ServerResponse> {
         return new Promise(
@@ -75,6 +77,7 @@ export class ScanController {
     }
 
     @Post('ping')
+    @HttpCode(200)
     @ApiResponse({status: 200, type: PingResponse})
     public async ping(): Promise<ServerResponse> {
         const pingDetails: PingScannerOutputParameters = await this.pingScannerService.execute();
@@ -82,6 +85,7 @@ export class ScanController {
     }
 
     @Get('version')
+    @HttpCode(200)
     @ApiResponse({status: 200, type: GetVersionResponse})
     public async getVersion(): Promise<ServerResponse> {
         const versionDetails: GetScannerVersionOutputParameters = await this.getScannerVersionService.execute();

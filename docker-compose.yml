@@ -7,6 +7,7 @@ services:
     build:
       context: scanner/clamav/docker
       dockerfile: Dockerfile
+    image: varentsovpavel/virus-scanner-clamav
     ports:
       - 3310:3310
     expose:
@@ -21,6 +22,7 @@ services:
     build:
       context: nodejs-rest-client/
       dockerfile: Dockerfile
+    image: varentsovpavel/virus-scanner-api
     depends_on:
       - scanner
     ports:

@@ -3,7 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { RootModule } from '../module/RootModule';
 import { Config } from '../../core/configuration';
 import { CoreLogger } from '../../core/lib/logger';
-import { DocumentBuilder, SwaggerBaseConfig, SwaggerDocument, SwaggerModule } from '@nestjs/swagger';
+import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 
 export class ServerApplication {
 
@@ -22,25 +22,24 @@ export class ServerApplication {
         );
 
         this.buildAPIDocumentation(app);
-        this.log();
 
         await app.listen(this.port, this.host);
+
+        this.log();
     }
 
     public buildAPIDocumentation(app: NestExpressApplication): void {
-        const apiHost: string = Config.API_DOCUMENTATION_HOST;
         const apiBasePath: string = Config.API_BASE_PATH;
 
         const title: string = 'Virus Scanner';
         const description: string = 'Virus Scanner API description';
 
-        const options: SwaggerBaseConfig = new DocumentBuilder()
+        const options: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
             .setTitle(title)
             .setDescription(description)
-            .setHost(apiHost)
             .build();
 
-        const document: SwaggerDocument = SwaggerModule.createDocument(app, options);
+        const document: OpenAPIObject = SwaggerModule.createDocument(app, options);
 
         SwaggerModule.setup(`${apiBasePath}/documentation`, app, document);
     }

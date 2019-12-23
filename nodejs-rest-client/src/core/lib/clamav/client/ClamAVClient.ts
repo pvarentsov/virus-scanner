@@ -1,6 +1,5 @@
 import { Readable } from 'stream';
-import * as net from 'net';
-import { Socket } from 'net';
+import { createConnection, Socket } from 'net';
 import { ClamAVCommandFactory } from '../command/factory/ClamAVCommandFactory';
 import { ClamaAVCommandType } from '../command/types/ClamaAVCommandType';
 import { ClamAVScanDetails } from './types/ClamAVScanDetails';
@@ -125,10 +124,9 @@ export class ClamAVClient {
                 resolve(commandResultBuffer.toString('utf-8'));
             };
 
-            const socket: Socket = net
-                .createConnection({ host: this.host, port: this.port })
-                .setTimeout(this.timeoutInMs);
+            const socket: Socket = createConnection({ host: this.host, port: this.port });
 
+            socket.setTimeout(this.timeoutInMs);
             socket.addListener('connect', socketOnConnectListener);
             socket.addListener('data', socketOnDataListener);
             socket.addListener('end', socketOnEndListener);

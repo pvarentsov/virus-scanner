@@ -18,12 +18,12 @@ run_tsc() {
 }
 
 copy_configuration_files() {
-    cp ./src/package.json ./dist/package.json
+    cp ./package.json ./dist/package.json
 }
 
 install_dependencies() {
     cd ./dist
-    yarn
+    yarn install --production
     cd ..
 }
 
