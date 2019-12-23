@@ -14,12 +14,12 @@ describe('ClamAVCommandDataTransformer', () => {
             `          3. "Data End Flag Part" where flag = 0 in the 32 bit format.`;
 
         it(testDescription, async () => {
-            const sourceBuffer: Buffer = MockHelper.createBuffer({ sizeInBytes: 1, UIntData: [255] });
+            const sourceBuffer: Buffer = MockHelper.createBuffer({ sizeInBytes: 1, UInt8Data: [255] });
             const sourceReadStream: Readable = MockHelper.createReadStream(sourceBuffer);
 
             const expectedBuffer: Buffer = MockHelper.createBuffer({
                 sizeInBytes: 9,
-                UIntData   : [0, 0, 0, 1, 255, 0, 0, 0, 0]
+                UInt8Data  : [0, 0, 0, 1, 255, 0, 0, 0, 0]
             });
 
             const transformedReadStream: Readable = sourceReadStream.pipe(ClamAVCommandDataTransformer.INSTREAM());
