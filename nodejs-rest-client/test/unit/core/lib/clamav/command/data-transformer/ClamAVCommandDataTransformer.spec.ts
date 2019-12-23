@@ -1,6 +1,8 @@
 import { MockHelper } from '../../../../../../.helper/MockHelper';
 import { Readable } from 'stream';
-import { ClamAVCommandDataTransformer } from '../../../../../../../src/core/lib/clamav/command/data-transformer/ClamAVCommandDataTransformer';
+import {
+    ClamAVCommandDataTransformer
+} from '../../../../../../../src/core/lib/clamav/command/data-transformer/ClamAVCommandDataTransformer';
 
 describe('ClamAVCommandDataTransformer', () => {
 
