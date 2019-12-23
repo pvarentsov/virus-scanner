@@ -30,7 +30,6 @@
     "dotenv": "8.2.0",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3",
-    "signale": "1.4.0",
     "swagger-ui-express": "4.1.2",
     "winston": "3.2.1"
   },
@@ -41,7 +40,6 @@
     "@types/jest": "24.0.23",
     "@types/mitm": "1.3.2",
     "@types/node": "12.12.17",
-    "@types/signale": "1.2.1",
     "jest": "24.9.0",
     "jest-coverage-badges": "1.1.2",
     "mitm": "1.7.0",
