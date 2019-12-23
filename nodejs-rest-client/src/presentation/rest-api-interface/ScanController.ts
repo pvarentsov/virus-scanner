@@ -28,7 +28,7 @@ export class ScanController {
         @Inject(ScanTokens.SyncScanService)
         private readonly syncScanService: IService<SyncScanInputParameters, SyncScanOutputParameters>,
 
-        @Inject(ScanTokens.PingScannerVersionService)
+        @Inject(ScanTokens.PingScannerService)
         private readonly pingScannerService: IService<void, PingScannerOutputParameters>,
 
         @Inject(ScanTokens.GetScannerVersionService)
