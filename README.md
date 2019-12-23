@@ -2,6 +2,9 @@
 
 This project is a virus scanner as a microservice with REST interface. It consists of ClamAV and NodeJS client for ClamAV.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
+![](./nodejs-rest-client/badges/badge-lines.svg)
+
 ## ClamAV
 
 [ClamAV](https://www.clamav.net/) is used as a docker image. It runs:
@@ -38,13 +41,12 @@ To run REST Client manually on your machine need to:
 * build project - `yarn build`
 * run project - `yarn start`
 
+To run unit tests use:
+* `yarn test:unit`
+* `yarn test:unit:coverage`
+
 You can run client with variables from [dotenv file](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.
 
 ## Notes
 
-The running of the `clamd` daemon can take a little time. So it can be unavailable the first 20-40 seconds after starting. 
-
-## TODO
-
-1. Endpoint to scan a files asynchronously (use notification URL)
-2. Unit and e2e tests
+The running of the `clamd` daemon can take a little time. So it can be unavailable the first 20-40 seconds after starting.
