@@ -12,6 +12,7 @@
     "lint": "./node_modules/.bin/tslint --project tsconfig.json --config tslint.json",
     "test:unit": "./node_modules/.bin/jest --config jest-unit.json",
     "test:unit:coverage": "./node_modules/.bin/jest --coverage --config jest-unit.json",
+    "test:unit:badges": "./node_modules/.bin/jest-coverage-badges input \"./unit-coverage/coverage-summary.json\" output \"./badges\"",
     "lib:check": "./node_modules/.bin/ncu",
     "lib:upgrade": "./node_modules/.bin/ncu -u"
   },
@@ -42,6 +43,7 @@
     "@types/node": "12.12.17",
     "@types/signale": "1.2.1",
     "jest": "24.9.0",
+    "jest-coverage-badges": "1.1.2",
     "mitm": "1.7.0",
     "npm-check-updates": "4.0.1",
     "ts-jest": "24.2.0",

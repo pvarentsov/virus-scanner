@@ -4,6 +4,11 @@
   "verbose": true,
   "testEnvironment": "node",
   "testRegex": ".(spec).ts$",
+  "coverageReporters": [
+    "json-summary",
+    "text",
+    "lcov"
+  ],
   "coverageDirectory": "./unit-coverage",
   "collectCoverageFrom": [
     "./src/**/*.{ts,js}",
