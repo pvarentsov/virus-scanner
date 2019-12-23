@@ -3,7 +3,7 @@
 This project is a virus scanner as a microservice with REST interface. It consists of ClamAV and NodeJS client for ClamAV.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](./LICENSE)
-![Coverage](./nodejs-rest-client/badges/badge-lines.svg)
+![](./nodejs-rest-client/badges/badge-lines.svg)
 
 ## ClamAV
 
