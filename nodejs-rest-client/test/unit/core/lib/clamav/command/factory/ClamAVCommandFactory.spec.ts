@@ -30,7 +30,7 @@ describe('ClamAVCommandFactory', () => {
                 needData   : false
             });
 
-            const mockReadStream: Readable = MockHelper.createMockReadStream();
+            const mockReadStream: Readable = MockHelper.createReadStream();
             
             const createCommandFunction: () => void = (): void => {
                 ClamAVCommandFactory.createCommand(ClamaAVCommandType.PING, mockReadStream);
@@ -62,7 +62,7 @@ describe('ClamAVCommandFactory', () => {
                 needData   : false
             });
 
-            const mockReadStream: Readable = MockHelper.createMockReadStream();
+            const mockReadStream: Readable = MockHelper.createReadStream();
 
             const createCommandFunction: () => void = (): void => {
                 ClamAVCommandFactory.createCommand(ClamaAVCommandType.VERSION, mockReadStream);
@@ -76,7 +76,7 @@ describe('ClamAVCommandFactory', () => {
     describe(`Create INSTREAM command`, () => {
 
         it('When commandType is INSTREAM and data is set, expect INSTREAM ClamAVCommand object', () => {
-            const mockReadStream: Readable = MockHelper.createMockReadStream();
+            const mockReadStream: Readable = MockHelper.createReadStream();
 
             const command: ClamAVCommand = ClamAVCommandFactory.createCommand(
                 ClamaAVCommandType.INSTREAM,

@@ -15,7 +15,7 @@ describe('ClamAVCommandDataTransformer', () => {
 
         it(testDescription, async () => {
             const sourceBuffer: Buffer = MockHelper.createBuffer({ sizeInBytes: 1, UIntData: [255] });
-            const sourceReadStream: Readable = MockHelper.createMockReadStream(sourceBuffer);
+            const sourceReadStream: Readable = MockHelper.createReadStream(sourceBuffer);
 
             const expectedBuffer: Buffer = MockHelper.createBuffer({
                 sizeInBytes: 9,

@@ -2,7 +2,7 @@ import { Readable } from 'stream';
 
 export class MockHelper {
 
-    public static createMockReadStream(buffer?: Buffer): Readable {
+    public static createReadStream(buffer?: Buffer): Readable {
         const data: Buffer = buffer || Buffer.from('11111111');
         const readStream: Readable = new Readable();
 
