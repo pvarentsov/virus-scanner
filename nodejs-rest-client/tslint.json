@@ -25,6 +25,7 @@
     "trailing-comma": false,
     "object-literal-shorthand": false,
     "no-console": false,
+    "typedef-whitespace": false,
     "typedef": [
       true,
       "call-signature",
