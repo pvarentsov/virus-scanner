@@ -55,19 +55,19 @@ describe('CoreLogger', () => {
 
     describe(`warn`, () => {
 
-        const baseLogTestDescription: string =
+        const baseWarnTestDescription: string =
             'When message is "Warning!" and context is not set, ' +
             'expect log with "warn" level, "Warning!" message and "Global" context';
 
-        it(baseLogTestDescription, async () => {
+        it(baseWarnTestDescription, async () => {
             await masterTest('warn', 'Warning!');
         });
 
-        const logWithCustomContextTestDescription: string =
+        const warnWithCustomContextTestDescription: string =
             'When message is "Warning!" and context is "Warning", ' +
             'expect log with "warn" level, "Warning!" message and "Warning" context';
 
-        it(logWithCustomContextTestDescription, async () => {
+        it(warnWithCustomContextTestDescription, async () => {
             await masterTest('warn', 'Warning!', 'Warning');
         });
 
@@ -75,19 +75,19 @@ describe('CoreLogger', () => {
 
     describe(`debug`, () => {
 
-        const baseLogTestDescription: string =
+        const baseDebugTestDescription: string =
             'When message is "Debug!" and context is not set, ' +
             'expect log with "debug" level, "Debug!" message and "Global" context';
 
-        it(baseLogTestDescription, async () => {
+        it(baseDebugTestDescription, async () => {
             await masterTest('debug', 'Debug!');
         });
 
-        const logWithCustomContextTestDescription: string =
+        const debugWithCustomContextTestDescription: string =
             'When message is "Debug!" and context is "Debug", ' +
             'expect log with "debug" level, "Debug!" message and "Debug" context';
 
-        it(logWithCustomContextTestDescription, async () => {
+        it(debugWithCustomContextTestDescription, async () => {
             await masterTest('debug', 'Debug!', 'Debug');
         });
 
@@ -95,19 +95,19 @@ describe('CoreLogger', () => {
 
     describe(`verbose`, () => {
 
-        const baseLogTestDescription: string =
+        const baseVerboseTestDescription: string =
             'When message is "Verbose!" and context is not set, ' +
             'expect log with "verbose" level, "Verbose!" message and "Global" context';
 
-        it(baseLogTestDescription, async () => {
+        it(baseVerboseTestDescription, async () => {
             await masterTest('verbose', 'Verbose!');
         });
 
-        const logWithCustomContextTestDescription: string =
+        const verboseWithCustomContextTestDescription: string =
             'When message is "Verbose!" and context is "Verbose", ' +
             'expect log with "verbose" level, "Verbose!" message and "Verbose" context';
 
-        it(logWithCustomContextTestDescription, async () => {
+        it(verboseWithCustomContextTestDescription, async () => {
             await masterTest('verbose', 'Verbose!', 'Verbose');
         });
 
