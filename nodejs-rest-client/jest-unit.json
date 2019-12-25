@@ -15,8 +15,11 @@
     "!./dist",
     "!./test",
     "!./node_modules",
+    "!./src/bootstrap.{ts,js}",
     "!./src/presentation/**",
-    "!./src/infrastructure/module/**"
+    "!./src/infrastructure/interceptor/**",
+    "!./src/infrastructure/module/**",
+    "!./src/infrastructure/server/**"
   ],
   "transform": {
     "^.+\\.(t|j)s$": "ts-jest"
