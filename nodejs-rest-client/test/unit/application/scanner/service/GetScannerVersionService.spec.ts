@@ -5,7 +5,7 @@ import { IService } from '../../../../../src/core/service';
 import { IMockClamAVServer, MockHelper } from '../../../../.helper/MockHelper';
 
 describe('GetScannerVersionService', () => {
-    const serverDelayInMs: number = 100;
+    const serverDelayInMs: number = 0;
 
     let mockClamAVServer: IMockClamAVServer;
     let service: IService<void, GetScannerVersionOutputParameters>;

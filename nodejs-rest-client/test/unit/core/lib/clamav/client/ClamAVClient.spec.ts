@@ -18,7 +18,7 @@ afterEach(() => {
 
 describe('ClamAVClient', () => {
     const connectionOptions: ClamAVConnectionOptions = { host: 'localhost', port: 42 };
-    const serverDelayInMs: number = 100;
+    const serverDelayInMs: number = 10;
 
     describe(`Send SCAN command`, () => {
 
@@ -106,12 +106,12 @@ describe('ClamAVClient', () => {
 
             mockClamAVServer = MockHelper.createClamAVServer({
                 sendOnConnection: mockReceivedData,
-                delayInMs       : serverDelayInMs
+                delayInMs       : 20
             });
 
             const expectedError: ClamAVClientError = ClamAVClientError.createConnectionTimedOutError();
 
-            const scanConnectionOptions: ClamAVConnectionOptions = { ...connectionOptions, timeoutInMs: 50 };
+            const scanConnectionOptions: ClamAVConnectionOptions = { ...connectionOptions, timeoutInMs: 10 };
 
             await expect(ClamAVClient.ping(scanConnectionOptions)).rejects.toEqual(expectedError);
         });

@@ -55,6 +55,7 @@ export class WinstonLoggerTransport implements ILoggerTransport {
     private static readonly DEFAULT_CONTEXT: string = 'Global';
 
     private static readonly OPTIONS: LoggerOptions = {
+        level: 'debug',
         transports: [ new transports.Console({}) ],
         format    : format.combine(
             format.timestamp({ format: `MM/DD/YYYY HH:mm:ss` }),

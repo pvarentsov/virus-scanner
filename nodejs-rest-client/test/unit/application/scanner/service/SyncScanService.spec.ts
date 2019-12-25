@@ -13,7 +13,7 @@ import { RequestValidationError } from '../../../../../src/core/base-errors/Requ
 import { Config } from '../../../../../src/core/configuration';
 
 describe('SyncScanService', () => {
-    const serverDelayInMs: number = 100;
+    const serverDelayInMs: number = 10;
 
     let mockClamAVServer: IMockClamAVServer;
     let service: IService<SyncScanInputParameters, SyncScanOutputParameters>;
