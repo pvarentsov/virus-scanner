@@ -122,6 +122,7 @@ async function masterTest(
     trace?: string
 
 ): Promise<void> {
+
     const expectedLevel: string = method !== 'log' ? method : 'info';
     const expectedContext: string = context || 'Global';
     const expectedMessage: string = message;
