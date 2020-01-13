@@ -7,11 +7,4 @@
 nodejs-rest-client/dist/
 nodejs-rest-client/node_modules/
 nodejs-rest-client/src/node_modules/
-
-### Yarn ###
-
-yarn-error.log
-
-### Jest ###
-
 nodejs-rest-client/unit-coverage/
