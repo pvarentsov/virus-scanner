@@ -24,6 +24,8 @@ Usage:
 1. `docker-compose pull`
 2. `docker-compose up -d`
 
+![API documentation](./assets/readme.api-documentation.png)
+
 ## Configuring
 
 REST Client configuring is based on environment variables. See all variables [here](nodejs-rest-client/env/.env). In current implementation all variables are required and must be exposed before starting the REST Client.
