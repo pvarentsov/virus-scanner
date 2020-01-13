@@ -24,10 +24,6 @@ Usage:
 1. `docker-compose pull`
 2. `docker-compose up -d`
 
-<p align="center">
-  <img src="./assets/readme.api-documentation.png">
-</p>
-
 ![API documentation ><](./assets/readme.api-documentation.png)
 
 ## Configuring
