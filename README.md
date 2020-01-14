@@ -26,7 +26,7 @@ Usage:
 
 <details>
   <summary>
-    The API documentation will be available on endpoint <i>GET <a href="http://localhost:1337/api/documentation">http://localhost:1337/api/documentation</a></i>
+    The API documentation will be available on endpoint <i>GET <a target="_blank" rel="noopener noreferrer" href="http://localhost:1337/api/documentation">http://localhost:1337/api/documentation</a></i>
     
   </summary>
   
