@@ -30,6 +30,8 @@ Usage:
     
   </summary>
   
+  </br>
+  
   ![API documentation](./assets/readme.api-documentation.png)
   
 </details>
