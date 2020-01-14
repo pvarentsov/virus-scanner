@@ -17,14 +17,20 @@ REST Client is a NodeJS application based on [NestJS](https://nestjs.com/) frame
 
 ## How-To
 
-To run microservice you can use `docker compose`. It will run Scanner service on port 3310 and API service on port 1337. The API documentation will be available on endpoint `GET http://127.0.0.1:1337/api/documentation`.
+To run microservice you can use `docker compose`. It will run Scanner service on port 3310 and API service on port 1337.
 
 Usage: 
 
 1. `docker-compose pull`
 2. `docker-compose up -d`
 
-![API documentation ><](./assets/readme.api-documentation.png)
+<details>
+  <summary>The API documentation will be available on endpoint `GET http://localhost:1337/api/documentation`</summary>
+  
+  ![API documentation](./assets/readme.api-documentation.png)
+  
+</details>
+
 
 ## Configuring
 
