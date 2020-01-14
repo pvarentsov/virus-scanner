@@ -25,7 +25,11 @@ Usage:
 2. `docker-compose up -d`
 
 <details>
-  <summary>The API documentation will be available on endpoint `GET http://localhost:1337/api/documentation`</summary>
+  <summary>
+    The API documentation will be available on endpoint <i>GET </i>
+    <a href="http://localhost:1337/api/documentation"></a>
+    
+  </summary>
   
   ![API documentation](./assets/readme.api-documentation.png)
   
