@@ -12,7 +12,7 @@ export class LoggerInterceptor implements NestInterceptor {
         const request: Request = context.switchToHttp().getRequest();
         const requestStartDate: number = Date.now();
 
-        return next.handle().pipe(tap(() => {
+        return next.handle().pipe(tap((): void => {
             const requestFinishDate: number = Date.now();
 
             const message: string =

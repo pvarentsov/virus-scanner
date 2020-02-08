@@ -18,6 +18,7 @@
     "no-trailing-whitespace": false,
     "no-inferrable-types": false,
     "object-literal-sort-keys": false,
+    "array-type": [true, "array-simple"],
     "member-ordering": false,
     "interface-name": [true, "always-prefix"],
     "no-default-export": false,
