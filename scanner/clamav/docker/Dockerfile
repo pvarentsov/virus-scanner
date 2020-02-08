@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ENV CLAMAV_VERSION=0.102.1
+ENV CLAMAV_VERSION=0.102.2
 
 # Install dependencies
 

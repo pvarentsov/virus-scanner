@@ -68,7 +68,7 @@ export class ClamAVClient {
         return new Promise((resolve: (value: string) => void, reject: (error: Error) => void): void => {
 
             const connectTimer: NodeJS.Timeout = setTimeout(
-                () => {
+                (): void => {
                     socket.destroy(ClamAVClientError.createConnectionTimedOutError());
 
                     if (this.inputData) {
@@ -84,7 +84,7 @@ export class ClamAVClient {
                 const inputData: { isFinished: boolean, stream: Readable } | undefined = this.inputData;
 
                 if (inputData) {
-                    inputData.stream.addListener('end', () => {
+                    inputData.stream.addListener('end', (): void => {
                         inputData.isFinished = true;
                         inputData.stream.destroy();
                     });
