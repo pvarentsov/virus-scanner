@@ -52,14 +52,15 @@ To run REST Client manually on your machine need to:
 * enter to the client directory - `cd ./nodejs-rest-client`
 * install dependencies - `yarn install`
 * build project - `yarn build:local`
-* run project - `yarn start:local`
+* run project - `yarn start`
 
 To run unit tests use:
 * `yarn test:unit`
 * `yarn test:unit:coverage`
 
-You can run client with variables from [.env](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.
+You can run client with variables from [.env](nodejs-rest-client/env/.env). Use `yarn start:local` command instead `yarn start`.
 
 ## Notes
 
-The running of the `clamd` daemon can take a little time. So it can be unavailable the first 20-40 seconds after starting.
+* This project is not production-ready. 
+* The running of the `clamav` container can take a little time. So it can be unavailable the first 20-30 seconds after starting.
