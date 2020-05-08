@@ -63,4 +63,4 @@ You can run client with variables from [.env](nodejs-rest-client/env/.env). Use 
 ## Notes
 
 * This project is not production-ready. 
-* The running of the `clamav` container can take a little time. So it can be unavailable the first 20-30 seconds after starting.
+* The running of the `clamd` and `freshclam` can take a little time. So clamav can be unavailable the first 20-30 seconds after starting.
