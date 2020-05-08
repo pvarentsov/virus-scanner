@@ -58,8 +58,9 @@ To run unit tests use:
 * `yarn test:unit`
 * `yarn test:unit:coverage`
 
-You can run client with variables from [.env](nodejs-rest-client/env/.env). Use `yarn start:env` command instead `yarn start`.
+You can run client with variables from [.env](nodejs-rest-client/env/.env). Use `yarn start:local` command instead `yarn start`.
 
 ## Notes
 
-The running of the `clamd` daemon can take a little time. So it can be unavailable the first 20-40 seconds after starting.
+* This project is not production-ready. 
+* The running of the `clamd` and `freshclam` can take a little time. So clamav can be unavailable the first 20-30 seconds after starting.
