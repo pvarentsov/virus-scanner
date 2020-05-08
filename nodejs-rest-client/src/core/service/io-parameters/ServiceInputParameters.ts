@@ -16,7 +16,7 @@ export class ServiceInputParameters {
             for (const validationError of validationErrors) {
                 const dtoValidationMessage: { property: string, errors: string[] } = {
                     property: validationError.property,
-                    errors  : Object.values(validationError.constraints)
+                    errors  : validationError.constraints ? Object.values(validationError.constraints) : []
                 };
                 details.details.push(dtoValidationMessage);
             }

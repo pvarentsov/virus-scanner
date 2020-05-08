@@ -52,7 +52,7 @@ To run REST Client manually on your machine need to:
 * enter to the client directory - `cd ./nodejs-rest-client`
 * install dependencies - `yarn install`
 * build project - `yarn build:local`
-* run project - `yarn start`
+* run project - `yarn start:local`
 
 To run unit tests use:
 * `yarn test:unit`
