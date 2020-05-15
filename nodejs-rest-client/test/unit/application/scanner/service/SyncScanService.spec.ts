@@ -54,7 +54,7 @@ describe('SyncScanService', () => {
             const inputParameters: SyncScanInputParameters = await SyncScanInputParameters.create(mockReadStream, 1);
             const result: SyncScanOutputParameters = await service.execute(inputParameters);
 
-            expect(result).toEqual({});
+            expect(result).toEqual(expectedResult);
         });
 
         it('Expect SyncScanOutputParameters object with INFECTED status', async () => {
