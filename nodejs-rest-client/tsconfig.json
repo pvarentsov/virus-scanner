@@ -5,8 +5,7 @@
     "target": "ES2018",
     "module": "commonjs",
     "lib": [
-      "es2018",
-      "dom"
+      "es2018"
     ],
     "types": [
       "reflect-metadata",
