@@ -18,14 +18,14 @@
     "lib:upgrade": "./node_modules/.bin/ncu -u && yarn install"
   },
   "engines": {
-    "node": ">=11"
+    "node": ">=12"
   },
   "engineStrict": true,
   "dependencies": {
-    "@nestjs/common": "7.0.9",
-    "@nestjs/core": "7.0.9",
-    "@nestjs/platform-express": "7.0.9",
-    "@nestjs/swagger": "4.5.5",
+    "@nestjs/common": "7.0.13",
+    "@nestjs/core": "7.0.13",
+    "@nestjs/platform-express": "7.0.13",
+    "@nestjs/swagger": "4.5.6",
     "busboy": "0.3.1",
     "class-validator": "0.12.2",
     "dotenv": "8.2.0",
@@ -35,20 +35,23 @@
     "winston": "3.2.1"
   },
   "devDependencies": {
-    "@nestjs/testing": "7.0.9",
+    "@nestjs/testing": "7.0.13",
     "@types/busboy": "0.2.3",
-    "@types/express": "4.17.2",
-    "@types/jest": "25.2.1",
-    "@types/mitm": "1.3.2",
-    "@types/node": "13.13.5",
+    "@types/express": "4.17.6",
+    "@types/jest": "25.2.2",
+    "@types/mitm": "1.3.3",
+    "@types/node": "14.0.1",
     "hook-std": "2.0.0",
     "jest": "26.0.1",
     "jest-coverage-badges": "1.1.2",
     "mitm": "1.7.0",
-    "npm-check-updates": "4.1.2",
-    "ts-jest": "25.5.0",
+    "npm-check-updates": "6.0.0",
+    "ts-jest": "25.5.1",
     "ts-node": "8.10.1",
     "tslint": "6.1.2",
-    "typescript": "3.8.3"
+    "typescript": "3.9.2"
+  },
+  "resolutions": {
+    "tslib": "1.11.2"
   }
 }
