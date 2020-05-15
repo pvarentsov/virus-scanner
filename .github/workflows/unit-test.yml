@@ -38,17 +38,4 @@ jobs:
       run: yarn build
 
     - name: Run unit tests
-      run: yarn test:unit:coverage
-
-    - name: Update badges
-      run: yarn test:unit:badges
-
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v4
-      with:
-        author_name: pvarentsov
-        author_email: varentsovpavel@gmail.com
-        message: "Update unit test coverage"
-        add: "*"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: yarn test:unit
