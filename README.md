@@ -4,6 +4,7 @@ This project is a virus scanner as a microservice with REST interface. It consis
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](./LICENSE)
 ![](./nodejs-rest-client/badges/badge-lines.svg)
+![Unit Test CI](https://github.com/pvarentsov/virus-scanner/workflows/Unit%20Test%20CI/badge.svg?branch=develop&event=pull_request)
 
 ## ClamAV
 
