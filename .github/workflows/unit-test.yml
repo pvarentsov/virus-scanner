@@ -21,15 +21,22 @@ jobs:
         working-directory: ./nodejs-rest-client
 
     steps:
+
     - uses: actions/checkout@v2
-    - name: Run unit tests and linting
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
+
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn install
-    - run: yarn lint
-    - run: yarn build
-    - run: yarn test:unit
-      
 
+    - name: Install libraries
+      run: yarn install
+
+    - name: Run linting
+      run: yarn lint
+
+    - name: Build application
+      run: yarn build
+
+    - name: Run unit tests
+      run: yarn test:unit
 
