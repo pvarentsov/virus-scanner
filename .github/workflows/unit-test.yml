@@ -43,12 +43,19 @@ jobs:
     - name: Update badges
       run: yarn test:unit:badges
 
-    - name: Commit changes
-      uses: EndBug/add-and-commit@v4
+    - uses: mdecoleman/pr-branch-name@1.0.0
+      id: vars
       with:
-        author_name: pvarentsov
-        author_email: varentsovpavel@gmail.com
-        message: "Update unit test coverage"
-        add: "*"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - run: echo ${{ steps.vars.outputs.branch }}
+
+#    - name: Commit changes
+#      uses: EndBug/add-and-commit@v4
+#      with:
+#        author_name: pvarentsov
+#        author_email: varentsovpavel@gmail.com
+#        message: "Update unit test coverage"
+#        add: "*"
+#        ref: ${{ }}
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
