@@ -12,7 +12,7 @@ import { Readable } from 'stream';
 import { RequestValidationError } from '../../../../../src/core/base-errors/RequestValidationError';
 import { Config } from '../../../../../src/core/configuration';
 
-describe.skip('SyncScanService', () => {
+describe('SyncScanService', () => {
     const serverDelayInMs: number = 10;
 
     let mockClamAVServer: IMockClamAVServer;
