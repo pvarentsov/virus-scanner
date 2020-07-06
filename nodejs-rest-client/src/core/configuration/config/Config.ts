@@ -1,54 +1,33 @@
-import { ConfigError } from '..';
+import { EnvParser } from '../parser/EnvParser';
 
 export class Config {
 
-    public static readonly API_HOST: string = Config.parseStringVariable('API_HOST');
+    // API
+    
+    public static readonly API_HOST: string = EnvParser.parseString('API_HOST');
 
-    public static readonly API_PORT: number = Config.parseNumberVariable('API_PORT');
+    public static readonly API_PORT: number = EnvParser.parseNumber('API_PORT');
 
-    public static readonly API_BASE_PATH: string = Config.parseStringVariable('API_BASE_PATH');
+    public static readonly API_BASE_PATH: string = EnvParser.parseString('API_BASE_PATH');
 
-    public static readonly API_CLUSTER_ENABLE: number = Config.parseNumberVariable('API_CLUSTER_ENABLE');
+    public static readonly API_CLUSTER_ENABLE: number = EnvParser.parseNumber('API_CLUSTER_ENABLE');
+    
+    // ClamAV
 
-    public static readonly CLAMAV_HOST: string = Config.parseStringVariable('CLAMAV_HOST');
+    public static readonly CLAMAV_HOST: string = EnvParser.parseString('CLAMAV_HOST');
 
-    public static readonly CLAMAV_PORT: number = Config.parseNumberVariable('CLAMAV_PORT');
+    public static readonly CLAMAV_PORT: number = EnvParser.parseNumber('CLAMAV_PORT');
 
-    public static readonly CLAMAV_TIMEOUT: number = Config.parseNumberVariable('CLAMAV_TIMEOUT');
+    public static readonly CLAMAV_TIMEOUT: number = EnvParser.parseNumber('CLAMAV_TIMEOUT');
+    
+    // Logs
 
-    public static readonly LOG_FORMAT: 'TEXT'|'JSON' = Config.parseStringVariable('LOG_FORMAT');
+    public static readonly LOG_FORMAT: 'TEXT'|'JSON' = EnvParser.parseString('LOG_FORMAT');
 
-    public static readonly LOG_DISABLE_COLORS: number = Config.parseNumberVariable('LOG_DISABLE_COLORS');
+    public static readonly LOG_DISABLE_COLORS: number = EnvParser.parseNumber('LOG_DISABLE_COLORS');
+    
+    // Files
 
-    public static readonly MAX_SYNC_SCAN_FILE_SIZE: number = Config.parseNumberVariable('MAX_SYNC_SCAN_FILE_SIZE');
-
-    private static parseStringVariable<T = string>(variable: string): T {
-        const value: string | undefined = process.env[variable];
-
-        if (value === undefined) {
-            throw ConfigError.createVariableNotSetError(variable);
-        }
-
-        /*tslint:disable-next-line*/
-        const result: any = value;
-
-        return result;
-    }
-
-    private static parseNumberVariable(variable: string): number {
-        const value: string | undefined = process.env[variable];
-
-        if (value === undefined) {
-            throw ConfigError.createVariableNotSetError(variable);
-        }
-
-        const parsedValue: number = parseInt(value.replace(new RegExp('_', 'g'), ''), 10);
-
-        if (isNaN(parsedValue)) {
-            throw ConfigError.createVariableParsingError(variable);
-        }
-
-        return parsedValue;
-    }
-
+    public static readonly MAX_SYNC_SCAN_FILE_SIZE: number = EnvParser.parseNumber('MAX_SYNC_SCAN_FILE_SIZE');
+    
 }
