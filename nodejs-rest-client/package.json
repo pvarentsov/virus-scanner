@@ -2,7 +2,7 @@
   "name": "nodejs-rest-client",
   "version": "1.0.0",
   "description": "REST client for virus scanner",
-  "author": "Pavel Varentsov",
+  "author": "Pavel Varentsov (varentsovpavel@gmail.com)",
   "license": "MIT",
   "scripts": {
     "build": "./scripts/compiler.sh",
