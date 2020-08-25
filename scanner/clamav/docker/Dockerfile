@@ -2,6 +2,8 @@ FROM ubuntu:latest
 
 ENV CLAMAV_VERSION=0.102.3
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Install dependencies
 
 RUN apt-get update && \
