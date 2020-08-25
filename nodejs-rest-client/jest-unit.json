@@ -3,7 +3,7 @@
   "rootDir": ".",
   "verbose": true,
   "testEnvironment": "node",
-  "testRegex": ".(spec).ts$",
+  "testRegex": "(/test/unit/.*|(\\.|/)(spec))\\.ts?$",
   "coverageReporters": [
     "json-summary",
     "text",
@@ -12,9 +12,6 @@
   "coverageDirectory": "./unit-coverage",
   "collectCoverageFrom": [
     "./src/**/*.{ts,js}",
-    "!./dist",
-    "!./test",
-    "!./node_modules",
     "!./src/bootstrap.{ts,js}",
     "!./src/presentation/**",
     "!./src/infrastructure/interceptor/**",
@@ -26,5 +23,10 @@
   },
   "setupFiles": [
     "./test/.helper/SetupEnv.ts"
-  ]
+  ],
+  "reporters": [
+    "default",
+    "jest-junit"
+  ],
+  "testResultsProcessor": "jest-sonar-reporter"
 }

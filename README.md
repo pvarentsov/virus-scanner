@@ -28,13 +28,10 @@ Usage:
 <details>
   <summary>
     The API documentation will be available on endpoint <i>GET <a href="http://localhost:1337/api/documentation" target="_blank" rel="noopener noreferrer">http://localhost:1337/api/documentation</a></i>
-    
   </summary>
-  
-  </br>
+  <br>
   
   ![API documentation](./assets/readme.api-documentation.png)
-  
 </details>
 
 

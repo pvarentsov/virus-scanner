@@ -8,3 +8,5 @@ nodejs-rest-client/dist/
 nodejs-rest-client/node_modules/
 nodejs-rest-client/src/node_modules/
 nodejs-rest-client/unit-coverage/
+
+test-report.xml
