@@ -3,7 +3,7 @@
 This project is a virus scanner as a microservice with REST interface. It consists of ClamAV and NodeJS client for ClamAV.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](./LICENSE)
-![Build](https://github.com/pvarentsov/virus-scanner/workflows/CI/badge.svg)
+![Build](https://github.com/pvarentsov/virus-scanner/workflows/Build/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pvarentsov_virus-scanner&metric=alert_status)](https://sonarcloud.io/dashboard?id=pvarentsov_virus-scanner)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=pvarentsov_virus-scanner&metric=coverage)](https://sonarcloud.io/dashboard?id=pvarentsov_virus-scanner)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=pvarentsov_virus-scanner&metric=ncloc)](https://sonarcloud.io/dashboard?id=pvarentsov_virus-scanner)
