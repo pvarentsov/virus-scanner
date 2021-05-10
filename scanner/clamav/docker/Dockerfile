@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ENV CLAMAV_VERSION=0.102.3
+ENV CLAMAV_VERSION=0.103.2
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
